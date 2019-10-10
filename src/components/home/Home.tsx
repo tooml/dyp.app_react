@@ -20,18 +20,13 @@ import {
 import { book, build, colorFill, grid } from 'ionicons/icons';
 import React from 'react';
 import './Home.css';
+import { Header } from '../../layout/page-header/Header';
 
 const HomePage: React.FC = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>Home</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header title='Home' />
+
       <IonContent>
         <IonCard className="welcome-card">
           <img src="/assets/shapes.svg" alt=""/>
