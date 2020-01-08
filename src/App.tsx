@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonSplitPane, IonContent } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { AppPage } from './declarations';
 
@@ -8,6 +8,8 @@ import Menu from './layout/menu/Menu';
 import Home from './components/home/Home';
 import Persons from './components/persons-management/persons/Persons';
 import PersonEdit from './components/persons-management/persons/PersonEdit';
+import TournamentName from './components/new-tournament/name-dialog/TournamentName';
+import TournamentOptions from './components/new-tournament/options-dialog/TournamentOptions';
 import { home, list } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
@@ -29,6 +31,8 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+import ToatsMessage from './components/toast/ToastMessenger';
+
 const appPages: AppPage[] = [
   {
     title: 'Home',
@@ -38,6 +42,11 @@ const appPages: AppPage[] = [
   {
     title: 'Persons',
     url: '/persons',
+    icon: list
+  },
+  {
+    title: 'New Tournament',
+    url: '/new',
     icon: list
   }
 ];
@@ -51,8 +60,12 @@ const App: React.FC = () => (
           <Route path="/home" component={Home} />
           <Route path="/persons" component={Persons} />
           <Route path="/edit/person" component={PersonEdit} />
+          <Route path="/new/options" component={TournamentOptions} />
+          <Route path="/new" component={TournamentName} />
+          
           <Route path="/" render={() => <Redirect to="/home" />}/>
         </IonRouterOutlet>
+        <ToatsMessage />
       </IonSplitPane>
     </IonReactRouter>
   </IonApp>

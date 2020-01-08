@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import { createStore, applyMiddleware  } from 'redux';
-import { reducers } from './state/store/PersonStore';
+import { reducers } from './state/store/Store';
 import thunk from 'redux-thunk';
 
 const store = createStore(reducers, applyMiddleware(thunk));

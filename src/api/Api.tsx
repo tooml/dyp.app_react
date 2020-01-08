@@ -17,6 +17,10 @@ interface StorePersonCommand {
     lastName: string;
 }
 
+
+axios.defaults.baseURL = 'http://localhost/api/v1/';
+
+
 let axiosConfig = {
     headers: {
         'Content-Type': 'application/json',
@@ -25,13 +29,13 @@ let axiosConfig = {
   };
 
 export const getPersons = async () => {
-    return await axios.get<PersonStockQueryResult>('http://localhost/api/v1/person/all').then(response => {
+    return await axios.get<PersonStockQueryResult>('/person/all').then(response => {
         return response.data.persons;
      });
 }
 
 export const getPersonTemplate = async () => {
-    return await axios.get<PersonTemplateQueryResult>('http://localhost/api/v1/person/template').then(response => {
+    return await axios.get<PersonTemplateQueryResult>('/person/template').then(response => {
         const personTemplate = response.data;
         const newPerson: Person = { 
             id: personTemplate.id, 
@@ -45,7 +49,7 @@ export const getPersonTemplate = async () => {
 
 export const savePersons = async (person: Person) => {
     const command: StorePersonCommand = { id: person.id, firstName: person.firstName, lastName: person.lastName };
-    return await axios.post('http://localhost/api/v1/person', command, axiosConfig).then(response => {
+    return await axios.post('/person', command, axiosConfig).then(response => {
         return response;
      });
 }

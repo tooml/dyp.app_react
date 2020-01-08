@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { Person, StoreState } from '../../../state/store/PersonStore';
+import { Person } from '../../../state/store/PersonStore';
+import { savePerson } from '../../../state/actions/PersonActions';
+import { StoreState } from '../../../state/store/Store';
 
 import { Header } from '../../../layout/page-header/Header';
-
 import {
     IonPage, IonContent, IonCard,
     IonCardTitle, IonCardHeader, IonGrid,
     IonRow, IonCol, IonItem,
-    IonLabel, IonInput, IonIcon, IonButton
+    IonLabel, IonInput
 } from '@ionic/react';
-import { checkmark } from 'ionicons/icons';
-import { savePerson } from '../../../state/actions/ActionTypes';
+import AcceptButton from '../../../layout/accept-buttons/AcceptButton';
+
 
 const PersonEdit: React.FC = () => {
 
@@ -23,8 +24,8 @@ const PersonEdit: React.FC = () => {
 
     const onSubmit = (event: any) => {
         event.preventDefault();
-        const p: Person = { id: person.id, firstName: firstName, lastName: lastName }
-        dispatch(savePerson(p));
+        const editedPerson: Person = { id: person.id, firstName: firstName, lastName: lastName }
+        dispatch(savePerson(editedPerson));
     } 
 
     useEffect(() => {
@@ -54,7 +55,7 @@ const PersonEdit: React.FC = () => {
                                 <IonCol size="7">
                                     <IonItem>
                                         <IonInput value={firstName} onInput={e => setFirstName((e.target as HTMLInputElement).value)}
-                                        name="firstName" type="text" placeholder="Vorname" 
+                                                  name="firstName" type="text" placeholder="Vorname" 
                                                   maxlength={20} minlength={3} required={true} />
                                     </IonItem>
                                 </IonCol>
@@ -131,14 +132,7 @@ const PersonEdit: React.FC = () => {
                     </IonCard>
 
                     <IonGrid>
-                        <IonRow>
-                            <IonCol size="9" />
-                            <IonCol size="3">
-                                <IonButton type="submit" shape="round">
-                                    <IonIcon slot="icon-only" icon={checkmark} />
-                                </IonButton>
-                            </IonCol>
-                        </IonRow>
+                        <AcceptButton />
                     </IonGrid>
                 </form>
             </IonContent>

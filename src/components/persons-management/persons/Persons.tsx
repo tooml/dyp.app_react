@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPersons, selectPerson, newPerson } from '../../../state/actions/ActionTypes';
-import { Person, StoreState } from '../../../state/store/PersonStore';
+import { fetchPersons, selectPerson, newPerson } from '../../../state/actions/PersonActions';
+import { Person } from '../../../state/store/PersonStore';
+import { StoreState } from '../../../state/store/Store';
 
 import { Header } from '../../../layout/page-header/Header';
 import PersonsList from './PersonsList';
 import AddPerson from './AddPerson';
 
 import { IonContent, IonPage } from '@ionic/react';
+
 
 const Persons: React.FC = () => {
 
@@ -34,6 +36,7 @@ const Persons: React.FC = () => {
                 <PersonsList persons={persons} selectPerson={onSelectPerson} />
             </IonContent>
             <AddPerson newPerson={onNewPerson}/>
+
         </IonPage>
     );
 };

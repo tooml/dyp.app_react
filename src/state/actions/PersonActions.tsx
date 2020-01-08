@@ -1,12 +1,11 @@
+import { Person } from '../store/PersonStore';
 import { Dispatch } from 'redux';
-import { Person } from '../store/PersonStore'
 import * as api from '../../api/Api'
-
+import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
 
 export const FETCH_PERSONS = 'FETCH_PERSONS'
 export const SELECT_PERSON = 'SELECT_PERSON'
 export const SAVE_PERSON = 'SAVE_PERSON'
-
 
 export interface FetchPersonsAction {
     type: typeof FETCH_PERSONS;
@@ -24,7 +23,6 @@ export interface SavePersonAction {
 }
 
 export type PersonActionTypes = FetchPersonsAction | SelectPersonAction | SavePersonAction;
-
 
 export const fetchPersons = () => {
     return async (dispatch: Dispatch) => {
@@ -62,6 +60,11 @@ export const savePerson = (person: Person) => {
             dispatch<SavePersonAction>({
                 type: SAVE_PERSON,
                 payload: person
+            });
+        }).then(() => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage('save', 'success')
             });
         })
     };
