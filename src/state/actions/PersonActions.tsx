@@ -1,4 +1,4 @@
-import { Person } from '../store/PersonStore';
+import Person from '../../contracts/data/Person';
 import { Dispatch } from 'redux';
 import * as api from '../../api/Api'
 import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
@@ -27,7 +27,6 @@ export type PersonActionTypes = FetchPersonsAction | SelectPersonAction | SavePe
 export const fetchPersons = () => {
     return async (dispatch: Dispatch) => {
         api.getPersons().then(persons => {
-            console.log(persons);
             dispatch<FetchPersonsAction>({
                 type: FETCH_PERSONS,
                 payload: persons

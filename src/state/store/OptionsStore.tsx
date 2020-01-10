@@ -10,7 +10,7 @@ export interface OptionsState {
 }
 
 export const initialState: OptionsState = {
-    tournamentName: "",
+    tournamentName: '',
     tables: 1,
     points: 2,
     pointsDrawn: 1,

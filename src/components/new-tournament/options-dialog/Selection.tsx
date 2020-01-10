@@ -10,7 +10,7 @@ import {
 } from "@ionic/react";
 import Dictionary from "./contracts/Options";
 
-export interface SelectOptionProps {
+export interface SelectionProps {
     label: string,
     options: Dictionary<string, string>[],
     selected: string,
@@ -18,10 +18,10 @@ export interface SelectOptionProps {
     onChanged: (value: number) => void
 }
 
-const SelectOption: React.FC<SelectOptionProps> = (props) => {
+const Selection: React.FC<SelectionProps> = (props) => {
 
     return (
-        <IonItem>
+        <IonItem lines="none">
             <IonLabel>{props.label}</IonLabel>
             <IonSelect placeholder="Select one" 
                 disabled={props.disabled} 
@@ -37,4 +37,4 @@ const SelectOption: React.FC<SelectOptionProps> = (props) => {
     );
 };
 
-export default SelectOption;
+export default Selection;

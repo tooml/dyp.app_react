@@ -1,14 +1,14 @@
 import { OptionsState, initialState } from "../store/OptionsStore";
 import {
-    OptionsActionTypes, FETCH_DEFAULT_OPTIONS, SET_TOURNAMENT_NAME, SET_DRAWN_OPTION,
+    OptionsActionTypes, FETCH_OPTIONS, SET_TOURNAMENT_NAME, SET_DRAWN_OPTION,
     SET_TABLES_OPTION, SET_POINTS_OPTION, SET_POINTS_DRAWN_OPTION, SET_SETS_OPTION,
     SET_WALKOVER_OPTION
 } from "../actions/OptionsActions";
 
 export function optionsReducer(optionsState: OptionsState = initialState, action: OptionsActionTypes): OptionsState {
     switch (action.type) {
-        case FETCH_DEFAULT_OPTIONS:
-            return optionsState;
+        case FETCH_OPTIONS:
+            return initialState;
 
         case SET_TOURNAMENT_NAME:
             return { ...optionsState, tournamentName: action.payload }

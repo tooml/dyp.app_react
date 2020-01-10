@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-export const FETCH_DEFAULT_OPTIONS = 'FETCH_DEFAULT_OPTIONS'
+export const FETCH_OPTIONS = 'FETCH_OPTIONS'
 export const SET_TOURNAMENT_NAME = 'SET_TOURNAMENT_NAME'
 export const SET_TABLES_OPTION = 'SET_TABLES_OPTION'
 export const SET_POINTS_OPTION = 'SET_POINTS_OPTION'
@@ -9,8 +9,8 @@ export const SET_DRAWN_OPTION = 'SET_DRAWN_OPTION'
 export const SET_SETS_OPTION = 'SET_SETS_OPTION'
 export const SET_WALKOVER_OPTION = 'SET_WALKOVER_OPTION'
 
-export interface FetchDefaultOptionsAction {
-    type: typeof FETCH_DEFAULT_OPTIONS;
+export interface FetchOptionsAction {
+    type: typeof FETCH_OPTIONS;
 }
 
 export interface SetTournamentNameAction {
@@ -48,14 +48,14 @@ export interface SetWalkoverOptionAction {
     payload: boolean;
 }
 
-export type OptionsActionTypes = FetchDefaultOptionsAction | SetTournamentNameAction | SetDrawnOptionAction |
-    SetTablesOptionAction | SetPointsOptionAction | SetPointsDrawnOptionAction | 
-    SetSetsOptionAction | SetWalkoverOptionAction
+export type OptionsActionTypes = FetchOptionsAction | SetTournamentNameAction | SetDrawnOptionAction |
+    SetTablesOptionAction | SetPointsOptionAction | SetPointsDrawnOptionAction | SetSetsOptionAction |
+    SetWalkoverOptionAction
 
 export const fetchOptions = () => {
     return async (dispatch: Dispatch) => {
-        dispatch<FetchDefaultOptionsAction>({
-            type: FETCH_DEFAULT_OPTIONS
+        dispatch<FetchOptionsAction>({
+            type: FETCH_OPTIONS
         });
     }
 };

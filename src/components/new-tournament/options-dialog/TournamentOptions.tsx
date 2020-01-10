@@ -4,15 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 import {
     IonContent,
-    IonGrid,
-    IonRow,
-    IonPage
+    IonPage,
+    IonItemGroup,
+    IonLabel,
+    IonItemDivider
 } from "@ionic/react";
 
 import { Header } from "../../../layout/page-header/Header";
-import OptionsBox from "./OptionsBox";
-import SelectOption from "./SelectOption";
-import ToggleOption from "./ToggleOption";
+import Selection from "./Selection";
+import Toggle from "./Toggle";
 import { StoreState } from "../../../state/store/Store";
 import {
     setTablesOption, setPointsOption, setPointsDrawnOption,
@@ -20,6 +20,8 @@ import {
 } from "../../../state/actions/OptionsActions";
 import { OptionsState } from "../../../state/store/OptionsStore";
 import Dictionary, { optionsCreator } from "./contracts/Options";
+import AcceptButton from "../../../layout/accept-buttons/AcceptButton";
+import { RouteComponentProps, withRouter } from "react-router";
 
 export interface OptionDefenition {
     name: string
@@ -27,7 +29,7 @@ export interface OptionDefenition {
     values: string[],
 }
 
-const TournamentOptions: React.FC = () => {
+const TournamentOptions: React.FC<RouteComponentProps> = (props) => {
 
     const dispatchStore = useDispatch();
     const storeOptions: OptionsState = useSelector((state: StoreState) => state.optionsState);
@@ -36,53 +38,75 @@ const TournamentOptions: React.FC = () => {
     const pointOptions: Dictionary<string, string>[] = optionsCreator("Punkt", "Punkte");
     const setOptions: Dictionary<string, string>[] = optionsCreator("Satz", "Sätze");
 
+    const pushOptionsToStore = () => {
+        props.history.push('/new/competitors');
+    }
+
     return (
         <IonPage>
-            <Header title='Options' />
+            <Header title='Optionen' />
             <IonContent>
                 {/* <p>{JSON.stringify(tableOptions)}</p> */}
-                <IonGrid>
-                    <IonRow>
-                        <OptionsBox label={"Tables"}>
-                            <SelectOption label={"Tables"}
-                                options={tableOptions}
-                                selected={String(storeOptions.tables)}
-                                disabled={false}
-                                onChanged={value => dispatchStore(setTablesOption(value))} />
-                        </OptionsBox>
-                        <OptionsBox label={"Points"}>
-                            <SelectOption label={"Points"}
-                                options={pointOptions}
-                                selected={String(storeOptions.points)}
-                                disabled={false}
-                                onChanged={value => dispatchStore(setPointsOption(value))} />
-                            <SelectOption label={"Points Drawn"}
-                                options={pointOptions}
-                                selected={String(storeOptions.pointsDrawn)}
-                                disabled={!storeOptions.drawn}
-                                onChanged={value => dispatchStore(setPointsDrawnOption(value))} />
-                            <ToggleOption label={"Drawn"}
-                                checked={storeOptions.drawn}
-                                onChanged={value => dispatchStore(setDrawnOption(value))} />
-                        </OptionsBox>
-                        <OptionsBox label={"Gewinnsätze"}>
-                            <SelectOption label={"Gewinnsätze"}
-                                options={setOptions} 
-                                selected={String(storeOptions.sets)}
-                                disabled={false}
-                                onChanged={value => dispatchStore(setSetsOption(value))} />
-                        </OptionsBox>
-                        <OptionsBox label={"Walkover"}>
-                            <ToggleOption label={"Freiloswertung"}
-                                checked={storeOptions.walkover}
-                                onChanged={value => dispatchStore(setWalkoverOption(value))} />
-                        </OptionsBox>
-                    </IonRow>
-                </IonGrid>
-                {/* <button onClick={() => {console.log(storeOptions)}}>asdfasfd</button> */}
-            </IonContent>          
+                <IonItemGroup>
+                    <IonItemDivider>
+                        <IonLabel>Tische</IonLabel>
+                    </IonItemDivider>
+
+                    <Selection label={"Tables"}
+                        options={tableOptions}
+                        selected={String(storeOptions.tables)}
+                        disabled={false}
+                        onChanged={value => dispatchStore(setTablesOption(value))} />
+                </IonItemGroup>
+
+                <IonItemGroup>
+                    <IonItemDivider>
+                        <IonLabel>Punkte</IonLabel>
+                    </IonItemDivider>
+
+                    <Selection label={"Points"}
+                        options={pointOptions}
+                        selected={String(storeOptions.points)}
+                        disabled={false}
+                        onChanged={value => dispatchStore(setPointsOption(value))} />
+
+                    <Selection label={"Points Drawn"}
+                        options={pointOptions}
+                        selected={String(storeOptions.pointsDrawn)}
+                        disabled={!storeOptions.drawn}
+                        onChanged={value => dispatchStore(setPointsDrawnOption(value))} />
+
+                    <Toggle label={"Drawn"}
+                        checked={storeOptions.drawn}
+                        onChanged={value => dispatchStore(setDrawnOption(value))} />
+                </IonItemGroup>
+
+                <IonItemGroup>
+                    <IonItemDivider>
+                        <IonLabel>Gewinnsätze</IonLabel>
+                    </IonItemDivider>
+
+                    <Selection label={"Gewinnsätze"}
+                        options={setOptions}
+                        selected={String(storeOptions.sets)}
+                        disabled={false}
+                        onChanged={value => dispatchStore(setSetsOption(value))} />
+                </IonItemGroup>
+
+                <IonItemGroup>
+                    <IonItemDivider>
+                        <IonLabel>Freilos</IonLabel>
+                    </IonItemDivider>
+
+                    <Toggle label={"Freiloswertung"}
+                        checked={storeOptions.walkover}
+                        onChanged={value => dispatchStore(setWalkoverOption(value))} />
+                </IonItemGroup>   
+
+                <AcceptButton disabled={false} onClick={() => pushOptionsToStore()} />
+            </IonContent>
         </IonPage>
     );
 };
 
-export default TournamentOptions;
+export default withRouter(TournamentOptions);

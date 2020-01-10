@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-import { Person } from '../../../state/store/PersonStore';
+import Person from '../../../contracts/data/Person';
 
 import { IonItem, IonLabel, IonIcon } from '@ionic/react';
 import { contact } from 'ionicons/icons';

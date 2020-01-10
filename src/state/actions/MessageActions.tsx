@@ -1,4 +1,4 @@
-import { ToastMessage } from '../store/MessageStore';
+import ToastMessage from '../../contracts/data/ToastMessage';
 
 export const SHOW_MESSAGE = 'SHOW_MESSAGE'
 

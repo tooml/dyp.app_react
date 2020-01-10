@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPersons, selectPerson, newPerson } from '../../../state/actions/PersonActions';
-import { Person } from '../../../state/store/PersonStore';
+import Person from '../../../contracts/data/Person';
 import { StoreState } from '../../../state/store/Store';
 
 import { Header } from '../../../layout/page-header/Header';

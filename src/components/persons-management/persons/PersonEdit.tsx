@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { Person } from '../../../state/store/PersonStore';
+import Person from '../../../contracts/data/Person';
 import { savePerson } from '../../../state/actions/PersonActions';
 import { StoreState } from '../../../state/store/Store';
 
@@ -12,8 +12,7 @@ import {
     IonRow, IonCol, IonItem,
     IonLabel, IonInput
 } from '@ionic/react';
-import AcceptButton from '../../../layout/accept-buttons/AcceptButton';
-
+import SubmitButton from '../../../layout/accept-buttons/SubmitButton';
 
 const PersonEdit: React.FC = () => {
 
@@ -132,7 +131,7 @@ const PersonEdit: React.FC = () => {
                     </IonCard>
 
                     <IonGrid>
-                        <AcceptButton />
+                        <SubmitButton />
                     </IonGrid>
                 </form>
             </IonContent>

@@ -10,6 +10,7 @@ import Persons from './components/persons-management/persons/Persons';
 import PersonEdit from './components/persons-management/persons/PersonEdit';
 import TournamentName from './components/new-tournament/name-dialog/TournamentName';
 import TournamentOptions from './components/new-tournament/options-dialog/TournamentOptions';
+import Competitors from './components/new-tournament/competitors-dialog/Competitors';
 import { home, list } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
@@ -61,6 +62,7 @@ const App: React.FC = () => (
           <Route path="/persons" component={Persons} />
           <Route path="/edit/person" component={PersonEdit} />
           <Route path="/new/options" component={TournamentOptions} />
+          <Route path="/new/competitors" component={Competitors} />
           <Route path="/new" component={TournamentName} />
           
           <Route path="/" render={() => <Redirect to="/home" />}/>

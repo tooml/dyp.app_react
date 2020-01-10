@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import AcceptButton from "../../../layout/accept-buttons/AcceptButton";
+import AcceptButton from "../../../layout/accept-buttons/SubmitButton";
 
 import {
     IonContent, IonCard, IonCardHeader,
@@ -30,8 +30,8 @@ const NameEdit: React.FC<NameEditProps> = (props) => {
                     props.onSubmit(tournamentName);
                 }}>
                     <IonRow class="align-items-center">
-                        <IonCol size="2" />
-                        <IonCol size="8">
+                        <IonCol size="1" />
+                        <IonCol size="10">
                             <IonCard>
                                 <IonCardHeader>
                                     <IonCardSubtitle>You need a name for your Tournament</IonCardSubtitle>
@@ -51,7 +51,7 @@ const NameEdit: React.FC<NameEditProps> = (props) => {
                                 </IonCardContent>
                             </IonCard>
                         </IonCol>
-                        <IonCol size="2" />
+                        <IonCol size="1" />
                     </IonRow>
                     <AcceptButton />
                 </form>

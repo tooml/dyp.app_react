@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Person } from '../state/store/PersonStore';
+import Person from '../contracts/data/Person';
 
 interface PersonStockQueryResult {
     persons: Person[];

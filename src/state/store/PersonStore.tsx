@@ -1,9 +1,4 @@
-
-export interface Person {
-  id: string,
-  firstName: string,
-  lastName: string
-}
+import Person from '../../contracts/data/Person';
 
 export interface PersonsState {
   persons: Person[],

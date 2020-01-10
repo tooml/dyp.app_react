@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Person } from '../../../state/store/PersonStore';
+import Person from '../../../contracts/data/Person';
 import PersonCard from './PersonCard';
 
 import { IonContent, IonList } from '@ionic/react';
