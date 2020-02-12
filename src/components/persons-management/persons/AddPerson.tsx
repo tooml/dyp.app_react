@@ -2,7 +2,6 @@ import React from 'react';
 
 import { IonIcon, IonFab, IonFabButton} from '@ionic/react';
 import { add } from 'ionicons/icons';
-import { RouteComponentProps } from 'react-router';
 
 interface PersonAddProps {
     newPerson: Function 

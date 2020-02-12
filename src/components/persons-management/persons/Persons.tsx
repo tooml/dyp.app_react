@@ -5,12 +5,11 @@ import { fetchPersons, selectPerson, newPerson } from '../../../state/actions/Pe
 import Person from '../../../contracts/data/Person';
 import { StoreState } from '../../../state/store/Store';
 
-import { Header } from '../../../layout/page-header/Header';
-import PersonsList from './PersonsList';
-import AddPerson from './AddPerson';
-
 import { IonContent, IonPage } from '@ionic/react';
 
+import Header from '../../../layout/page-header/Header';
+import PersonsList from './PersonsList';
+import AddPerson from './AddPerson';
 
 const Persons: React.FC = () => {
 

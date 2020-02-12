@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonSplitPane, IonContent } from '@ionic/react';
+import { IonRouterOutlet, IonSplitPane, IonApp } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { AppPage } from './declarations';
 
@@ -11,7 +11,8 @@ import PersonEdit from './components/persons-management/persons/PersonEdit';
 import TournamentName from './components/new-tournament/name-dialog/TournamentName';
 import TournamentOptions from './components/new-tournament/options-dialog/TournamentOptions';
 import Competitors from './components/new-tournament/competitors-dialog/Competitors';
-import { home, list } from 'ionicons/icons';
+import Tournaments from './components/load-tournament/load-dialog/Tournaments';
+import TournamentTabs from './components/tournament/tournament-tabs';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -33,22 +34,33 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 import ToatsMessage from './components/toast/ToastMessenger';
+import { home, list } from 'ionicons/icons';
 
 const appPages: AppPage[] = [
   {
     title: 'Home',
     url: '/home',
-    icon: home
+    icon: home.md
   },
   {
     title: 'Persons',
     url: '/persons',
-    icon: list
+    icon: list.md
   },
   {
     title: 'New Tournament',
     url: '/new',
-    icon: list
+    icon: list.md
+  },
+  {
+    title: 'Load Tournament',
+    url: '/load',
+    icon: list.md
+  },
+  {
+    title: 'Tournament',
+    url: '/tournament',
+    icon: list.md
   }
 ];
 
@@ -64,7 +76,8 @@ const App: React.FC = () => (
           <Route path="/new/options" component={TournamentOptions} />
           <Route path="/new/competitors" component={Competitors} />
           <Route path="/new" component={TournamentName} />
-          
+          <Route path="/load" component={Tournaments} />
+          <Route path="/tournament" component={TournamentTabs} />
           <Route path="/" render={() => <Redirect to="/home" />}/>
         </IonRouterOutlet>
         <ToatsMessage />

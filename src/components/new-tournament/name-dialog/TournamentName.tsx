@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Header } from '../../../layout/page-header/Header';
+import Header from '../../../layout/page-header/Header';
 import NameEdit from './NameEdit';
 
 import { IonContent, IonPage } from '@ionic/react';

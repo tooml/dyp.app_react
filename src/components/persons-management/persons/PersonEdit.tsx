@@ -5,7 +5,6 @@ import Person from '../../../contracts/data/Person';
 import { savePerson } from '../../../state/actions/PersonActions';
 import { StoreState } from '../../../state/store/Store';
 
-import { Header } from '../../../layout/page-header/Header';
 import {
     IonPage, IonContent, IonCard,
     IonCardTitle, IonCardHeader, IonGrid,
@@ -13,6 +12,7 @@ import {
     IonLabel, IonInput
 } from '@ionic/react';
 import SubmitButton from '../../../layout/accept-buttons/SubmitButton';
+import Header from '../../../layout/page-header/Header';
 
 const PersonEdit: React.FC = () => {
 

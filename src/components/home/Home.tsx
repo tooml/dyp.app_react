@@ -15,7 +15,7 @@ import {
 import { book, build, colorFill, grid } from 'ionicons/icons';
 import React from 'react';
 import './Home.css';
-import { Header } from '../../layout/page-header/Header';
+import Header from '../../layout/page-header/Header';
 
 const HomePage: React.FC = () => {
   return (
