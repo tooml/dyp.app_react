@@ -36,13 +36,7 @@ const ListItems = () => {
 
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(x => {
     return (
-      <IonItem key={x}>
-        <IonIcon icon={icons[x - 1]} slot="start" />
-        Item {x}
-        <div className="item-note" slot="end">
-          This is item # {x}
-        </div>
-      </IonItem>
+<h1>asdf</h1>
     );
   });
 

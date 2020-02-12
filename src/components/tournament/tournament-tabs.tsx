@@ -11,8 +11,8 @@ import { IonReactRouter } from '@ionic/react-router';
 import { football, list, settings, body } from 'ionicons/icons';
 
 import Header from '../../layout/page-header/Header';
-import FixturesOverview from './game-tab/fixtures-overview';
-import ResultEntryCard from './game-tab/result-entry/ResultEntryCard';
+import FixturesOverview from './game-tab/MatchesOverview';
+import ResultEntryCard from './game-tab/match-result/ResultEntry';
 
 
 const pagetwo: React.FC = () => {
@@ -62,22 +62,22 @@ const TournamentTabs: React.FC = () => {
 
                         <IonTabBar slot="bottom">
                             <IonTabButton tab="game" href="/tournament/game">
-                                <IonIcon icon={football} />
+                                <IonIcon icon={'football'} />
                                 <IonLabel>Game</IonLabel>
                             </IonTabButton>
 
                             <IonTabButton tab="ranking" href="/tournament/ranking">
-                                <IonIcon icon={list} />
+                                <IonIcon icon={'list'} />
                                 <IonLabel>Ranking</IonLabel>
                             </IonTabButton>
 
                             <IonTabButton tab="options" href="/tournament/options">
-                                <IonIcon icon={settings} />
+                                <IonIcon icon={'settings'} />
                                 <IonLabel>Options</IonLabel>
                             </IonTabButton>
 
                             <IonTabButton tab="players" href="/tournament/players">
-                                <IonIcon icon={body} />
+                                <IonIcon icon={'body'} />
                                 <IonLabel>Players</IonLabel>
                             </IonTabButton>
                         </IonTabBar>

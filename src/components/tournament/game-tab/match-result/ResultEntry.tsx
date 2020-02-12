@@ -2,8 +2,7 @@ import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import {
-    IonContent, IonCard,
-    IonCardContent, IonPage, IonToolbar,
+    IonContent, IonCardContent, IonPage, IonToolbar,
     IonTitle, IonButtons, IonHeader, IonBackButton, IonCardHeader
 } from '@ionic/react';
 
@@ -15,7 +14,7 @@ interface ResultEntryCardProps extends RouteComponentProps {
     closeAction: Function;
 }
 
-const ResultEntryCard: React.FC<ResultEntryCardProps> = (props) => {
+const ResultEntry: React.FC<ResultEntryCardProps> = (props) => {
     return (
         <IonPage>
             <IonHeader>
@@ -41,4 +40,4 @@ const ResultEntryCard: React.FC<ResultEntryCardProps> = (props) => {
     );
 };
 
-export default withRouter(ResultEntryCard);
+export default withRouter(ResultEntry);

@@ -6,9 +6,9 @@ import {
     IonPage
 } from '@ionic/react';
 
-import FixtureList from './round/fixture-list';
+import FixtureList from './matches/MatchList';
 
-const FixturesOverview: React.FC = () => {
+const MatchesOverview: React.FC = () => {
 
     const fixtures: number[] = [0, 1, 2];
 
@@ -27,4 +27,4 @@ const FixturesOverview: React.FC = () => {
     );
 };
 
-export default FixturesOverview;
+export default MatchesOverview;

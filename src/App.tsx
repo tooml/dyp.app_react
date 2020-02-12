@@ -34,33 +34,33 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 import ToatsMessage from './components/toast/ToastMessenger';
-import { home, list } from 'ionicons/icons';
+import { homeOutline, list } from 'ionicons/icons';
 
 const appPages: AppPage[] = [
   {
     title: 'Home',
     url: '/home',
-    icon: home.md
+    icon: homeOutline
   },
   {
     title: 'Persons',
     url: '/persons',
-    icon: list.md
+    icon: list
   },
   {
     title: 'New Tournament',
     url: '/new',
-    icon: list.md
+    icon: list
   },
   {
     title: 'Load Tournament',
     url: '/load',
-    icon: list.md
+    icon: list
   },
   {
     title: 'Tournament',
     url: '/tournament',
-    icon: list.md
+    icon: list
   }
 ];
 

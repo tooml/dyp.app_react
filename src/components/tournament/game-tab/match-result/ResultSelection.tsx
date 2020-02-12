@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-    IonSegment, IonSegmentButton, IonLabel, IonItem
+    IonSegment, IonSegmentButton, IonLabel, IonItem, IonIcon
 } from '@ionic/react';
 
 interface ResultSelectionProps {

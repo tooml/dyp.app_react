@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Person from '../../../contracts/data/Person';
-import PersonCard from './PersonCard';
+import PersonListItem from './PersonListItem';
 
 import { IonContent, IonList } from '@ionic/react';
 
@@ -17,7 +17,7 @@ const PersonsList: React.FC<PersonListProps> = (props) => {
             <IonList lines="none">
                 {props.persons.length ?
                     props.persons.map((person: Person) => {
-                        return <PersonCard key={person.id}
+                        return <PersonListItem key={person.id}
                             person={person}
                             selectPerson={props.selectPerson}
                         />

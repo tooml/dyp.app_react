@@ -13,7 +13,7 @@ interface FixtureItemProps {
     id: number;
 }
 
-const FixtureItem: React.FC<FixtureItemProps> = (props) => {
+const MatchListItem: React.FC<FixtureItemProps> = (props) => {
 
     // const [showResultEntry, setShowResultEntry] = useState(false);
     const id: number = 1;
@@ -37,4 +37,4 @@ const FixtureItem: React.FC<FixtureItemProps> = (props) => {
     );
 };
 
-export default FixtureItem;
+export default MatchListItem;

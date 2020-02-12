@@ -15,7 +15,7 @@ const AcceptButton: React.FC<AcceptButtonProps> = (props) => {
             <IonCol size="9" />
             <IonCol size="3">
                 <IonButton type="button" shape="round" disabled={props.disabled} onClick={event => props.onClick()}>
-                    <IonIcon slot="icon-only" icon={checkmark} />
+                    <IonIcon slot="icon-only" icon={'checkmark'} />
                 </IonButton>
             </IonCol>
         </IonRow>

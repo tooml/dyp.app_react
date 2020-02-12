@@ -8,15 +8,15 @@ import {
     IonGrid
 } from '@ionic/react';
 
-import FixtureItem from './fixture-item.tsx/fixture-item';
-import RoundHeader from './round-header';
+import MatchListItem from './MatchListItem';
+import RoundHeader from './RoundHeader';
 
 interface FixtureListProps {
     name: string,
     fixtures: number[]
 }
 
-const FixtureList: React.FC = () => {
+const MatchList: React.FC = () => {
 
     const fixtures: number[] = [0];
 
@@ -30,7 +30,7 @@ const FixtureList: React.FC = () => {
                         <IonList lines="none">
                             {fixtures.length ?
                                 fixtures.map((x: number) => {
-                                    return <FixtureItem key={x} id={x} />
+                                    return <MatchListItem key={x} id={x} />
                                 }) : <p>Keine Einträge {fixtures.length}</p>}
                         </IonList>
                     </IonCol>
@@ -41,4 +41,4 @@ const FixtureList: React.FC = () => {
     );
 };
 
-export default FixtureList;
+export default MatchList;

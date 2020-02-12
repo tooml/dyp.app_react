@@ -10,7 +10,7 @@ const SubmitButton: React.FC = () => {
             <IonCol size="9" />
             <IonCol size="3">
                 <IonButton type="submit" shape="round">
-                    <IonIcon slot="icon-only" icon={checkmark} />
+                    <IonIcon slot="icon-only" icon={'checkmark'} />
                 </IonButton>
             </IonCol>
         </IonRow>
