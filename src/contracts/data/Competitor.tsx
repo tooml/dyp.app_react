@@ -1,6 +1,7 @@
 import Person from "./Person";
 
 export default interface Competitor {
-    person: Person,
+    personId: string,
+    name: string
     compete: boolean
 }

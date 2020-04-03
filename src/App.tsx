@@ -4,15 +4,15 @@ import { IonRouterOutlet, IonSplitPane, IonApp } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { AppPage } from './declarations';
 
-import Menu from './layout/menu/Menu';
-import Home from './components/home/Home';
-import Persons from './components/persons-management/persons/Persons';
-import PersonEdit from './components/persons-management/persons/PersonEdit';
-import TournamentName from './components/new-tournament/name-dialog/TournamentName';
-import TournamentOptions from './components/new-tournament/options-dialog/TournamentOptions';
-import Competitors from './components/new-tournament/competitors-dialog/Competitors';
-import Tournaments from './components/load-tournament/load-dialog/Tournaments';
-import TournamentTabs from './components/tournament/tournament-tabs';
+import Menu from './Menu';
+import Home from './pages/home/Home';
+import Persons from './pages/persons-management/persons/Persons';
+import PersonEdit from './pages/persons-management/persons/PersonEdit';
+import TournamentName from './pages/new-tournament/name-dialog/TournamentName';
+import TournamentOptions from './pages/new-tournament/options-dialog/TournamentOptions';
+import Competitors from './pages/new-tournament/competitors-dialog/Competitors';
+import Tournaments from './pages/load-tournament/load-dialog/Tournaments';
+import TournamentTabs from './pages/tournament/tournament-tabs';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -30,10 +30,12 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
+import './style.scss';
+
 /* Theme variables */
 import './theme/variables.css';
 
-import ToatsMessage from './components/toast/ToastMessenger';
+import ToatsMessage from './components/ToastMessenger';
 import { homeOutline, list } from 'ionicons/icons';
 
 const appPages: AppPage[] = [
@@ -78,8 +80,8 @@ const App: React.FC = () => (
           <Route path="/new" component={TournamentName} />
           <Route path="/load" component={Tournaments} />
           <Route path="/tournament" component={TournamentTabs} />
-          <Route path="/" render={() => <Redirect to="/home" />}/>
-        </IonRouterOutlet>
+          <Route path="/" render={() => <Redirect to="/home" />} />
+        </IonRouterOutlet>  
         <ToatsMessage />
       </IonSplitPane>
     </IonReactRouter>

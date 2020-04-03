@@ -1,0 +1,33 @@
+#match-header-container {
+    display: grid;
+    grid-template-columns: 10fr 2fr;
+    grid-auto-rows: auto;
+    gap: 3px;
+    grid-template-areas: 'home-team home-result' 'text empty' 'away-team away-result'
+}
+
+#match-header-container div {
+    display: inline-grid;
+    place-items: center;
+    font-size: large;
+}
+
+#home-team {
+    grid-area: home-team;
+}
+
+#home-result {
+    grid-area: home-result;
+}
+
+#text {
+    grid-area: text;
+}
+
+#away-team {
+    grid-area: away-team;
+}
+
+#away-result {
+    grid-area: away-result;
+}

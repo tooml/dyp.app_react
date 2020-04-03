@@ -1,18 +1,57 @@
 import { Dispatch } from 'redux';
 import * as api from '../../api/Api'
-import Tournament from '../../contracts/data/Tournament';
+import TournamentInfo from '../../contracts/data/TournamentInfo';
+import { Tournament, Round, Match } from '../../contracts/data/Tournament';
+import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
+import { OptionsState } from '../store/OptionsStore';
 
 
 export const FETCH_TOURNAMENTS = 'FETCH_TOURNAMENTS'
-
+export const LOAD_TOURNAMENT = 'LOAD_TOURNAMENT'
+export const NEW_ROUND = 'NEW_ROUND'
+export const SELECT_MATCH = 'SELECT_MATCH'
+export const SAVE_MATCH_RESULT = 'SAVE_MATCH_RESULT'
+export const RESET_MATCH_RESULT = 'RESET_MATCH_RESULT'
 
 export interface FetchTournamentsAction {
     type: typeof FETCH_TOURNAMENTS;
-    payload: Tournament[];
+    payload: TournamentInfo[];
 }
 
+export interface LoadTournamenAction {
+    type: typeof LOAD_TOURNAMENT;
+    payload: Tournament;
+}
 
-export type TournamentsActionTypes = FetchTournamentsAction;
+export interface NewRoundAction {
+    type: typeof NEW_ROUND;
+    payload: Round;
+}
+
+export interface SelectMatchAction {
+    type: typeof SELECT_MATCH;
+    payload: Match;
+}
+
+export interface SaveMatchResultAction {
+    type: typeof SAVE_MATCH_RESULT;
+    payload: Match;
+}
+
+export interface ResetMatchResultAction {
+    type: typeof RESET_MATCH_RESULT;
+    payload: Match;
+}
+
+export type TournamentsActionTypes = FetchTournamentsAction | LoadTournamenAction |
+    NewRoundAction | SelectMatchAction | SaveMatchResultAction | ResetMatchResultAction;
+
+
+export const createNewTournament = (options: OptionsState, ids: string[]) => {
+    return async (dispatch: Dispatch) => {
+        api.createTournament(options, ids).then(result => console.log(result));
+    };
+};
 
 export const fetchTournaments = () => {
     return async (dispatch: Dispatch) => {
@@ -20,6 +59,69 @@ export const fetchTournaments = () => {
             dispatch<FetchTournamentsAction>({
                 type: FETCH_TOURNAMENTS,
                 payload: tournaments
+            });
+        })
+    };
+};
+
+export const loadTournament = (tournamentId: string) => {
+    return async (dispatch: Dispatch) => {
+        api.loadTournament(tournamentId).then(tournament => {
+            dispatch<LoadTournamenAction>({
+                type: LOAD_TOURNAMENT,
+                payload: tournament
+            });
+        })
+    };
+};
+
+export const newRound = (tournamentId: string) => {
+    return async (dispatch: Dispatch) => {
+        api.createRound(tournamentId).then(result => {
+            api.loadLastTournamentRound(tournamentId).then(round => {
+                dispatch<NewRoundAction>({
+                    type: NEW_ROUND,
+                    payload: round
+                });
+            })
+        });
+    };
+};
+
+export const selectMatch = (match: Match): SelectMatchAction => {
+    return {
+        type: SELECT_MATCH,
+        payload: match
+    };
+};
+
+export const saveMatchResult = (match: Match) => {
+    return async (dispatch: Dispatch) => {
+        api.saveMatchResult(match.id, match.setResults).then(() => {
+            dispatch<SaveMatchResultAction>({
+                type: SAVE_MATCH_RESULT,
+                payload: match
+            })
+        }).then(() => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage('save', 'success')
+            });
+        })
+    };
+};
+
+export const resetMatchResult = (match: Match) => {
+    return async (dispatch: Dispatch) => {
+        api.resetMatchResult(match.id).then(() => {
+            dispatch<ResetMatchResultAction>({
+                type: RESET_MATCH_RESULT,
+                payload: match
+            })
+        }).then(() => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage('save', 'success')
             });
         })
     };

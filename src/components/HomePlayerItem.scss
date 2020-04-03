@@ -1,0 +1,19 @@
+#home-container {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 30px;
+    grid-gap: 2px;
+    align-items: center;
+    justify-items: center stretch;
+    grid-template-areas: 'player-label player-pic'
+}
+
+#home-player {
+    grid-area: player-label;
+    text-align: right;
+}
+
+#home-player-pic {
+    grid-area: player-pic;
+    place-self: center;
+}

@@ -1,10 +1,14 @@
 {
+  "plugins" : [
+    "react-hooks"
+  ],
   "extends": ["tslint-react"],
   "rules": {
     "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
     "jsx-alignment": false,
-    "jsx-wrap-multiline": false
+    "jsx-wrap-multiline": false,
+    "react-hooks/rules-of-hooks" : "error",
+    "react-hooks/exhaustive-deps" : "warn"
   }
 }
-

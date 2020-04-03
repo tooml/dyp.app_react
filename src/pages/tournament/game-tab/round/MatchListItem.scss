@@ -1,0 +1,31 @@
+#match-container {
+    display: grid;
+    width: 100%;
+    background-color: var(--ion-color-secondary-shade);
+    grid-template-columns: 1rf 1fr 1fr;
+    grid-auto-rows: auto;
+    grid-gap: 3px;
+    align-items: center;
+    justify-items: center stretch;
+    grid-template-areas: 'table-label table-label table-label' 'home-team result-btn away-team' 'home-team result-btn away-team'
+}
+
+#table-label {
+    grid-area: table-label;
+    background-color: var(--ion-color-secondary-tint);
+}
+
+#home-team {
+    grid-area: home-team;
+}
+
+#result-btn {
+    grid-area: result-btn;
+    align-self: center;
+    justify-self: center;
+    font-size: larger;
+}
+
+#away-team {
+    grid-area: away-team;
+}

@@ -6,7 +6,7 @@ export interface MessageState {
 }
 
 export const initialMessageState: MessageState = {
-    id: "",
-    message: "",
-    color: ""
+    id: '',
+    message: '',
+    color: ''
 }

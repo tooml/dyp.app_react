@@ -1,0 +1,19 @@
+#away-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 30px;
+    grid-gap: 2px;
+    align-items: center;
+    justify-items: center stretch;
+    grid-template-areas: 'player-pic player-label'
+}
+
+#away-player {
+    grid-area: player-label;
+    text-align: left;
+}
+
+#away-player-pic {
+    grid-area: player-pic;
+    place-self: center;
+}

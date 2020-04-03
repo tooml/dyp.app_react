@@ -7,5 +7,5 @@ export interface PersonsState {
 
 export const initialState: PersonsState = {
   persons: [],
-  person: { id: "", firstName: "", lastName: "" }
+  person: { id: '', firstName: '', lastName: '' }
 }

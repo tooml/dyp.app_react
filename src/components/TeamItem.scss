@@ -1,0 +1,15 @@
+#team-container {
+    display: grid;
+    grid-auto-rows: 30px;
+    align-items: center;
+    justify-items: center stretch;
+    grid-template-areas: 'player-one' 'player-two'
+}
+
+#player-one {
+    grid-area: player-one;
+}
+
+#player-two {
+    grid-area: player-two;
+}
