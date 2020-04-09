@@ -12,18 +12,9 @@ import { football, list, settings, body } from 'ionicons/icons';
 
 import Header from '../../components/Header';
 import Rounds from './game-tab/Rounds';
+import Ranking from './ranking-tab/Ranking';
 import MatchResult from './game-tab/match-details/MatchResult';
 
-
-const pagetwo: React.FC = () => {
-    return (
-        <IonPage>
-            <Header title='pagetwo' backButtonUrl=''/>
-            <IonContent>
-                <h1>pagetwo</h1>
-            </IonContent>
-        </IonPage>);
-}
 
 const pagethree: React.FC = () => {
     return (
@@ -52,31 +43,32 @@ const TournamentTabs: React.FC = () => {
                 <IonContent>
                     <IonTabs>
                         <IonRouterOutlet>
-                            <Route path="/tournament/game" component={Rounds} exact={true} />
-                            <Route path="/tournament/match/edit" component={MatchResult} />
-                            <Route path="/tournament/ranking" component={pagetwo} exact={true} />
-                            <Route path="/tournament/options" component={pagethree} exact={true} />
-                            <Route path="/tournament/players" component={pagefour} />
-                            <Route path="/tournament" render={() => <Redirect to="/tournament/game" />} exact={true} />
+                            <Route path="/game"  render={() => <Rounds  />} exact={true}/>
+                            <Route path="/edit" render={() => <MatchResult  />} exact={true} />
+                            <Route path="/ranking" component={Ranking} exact={true}/>
+                            <Route path="/options" component={pagethree}  exact={true}/>
+                            <Route path="/players" component={pagefour}  exact={true}/>
+                            <Route path="/tournament" render={() => <Redirect to="/game" />} />
+                            {/* https://github.com/aaronksaunders/ionic-react-tabs-tut */}
                         </IonRouterOutlet>
 
                         <IonTabBar slot="bottom">
-                            <IonTabButton tab="game" href="/tournament/game">
+                            <IonTabButton tab="game" href="/game">
                                 <IonIcon icon={'football'} />
                                 <IonLabel>Game</IonLabel>
                             </IonTabButton>
 
-                            <IonTabButton tab="ranking" href="/tournament/ranking">
+                            <IonTabButton tab="ranking" href="/ranking">
                                 <IonIcon icon={'list'} />
                                 <IonLabel>Ranking</IonLabel>
                             </IonTabButton>
 
-                            <IonTabButton tab="options" href="/tournament/options">
+                            <IonTabButton tab="options" href="/options">
                                 <IonIcon icon={'settings'} />
                                 <IonLabel>Options</IonLabel>
                             </IonTabButton>
 
-                            <IonTabButton tab="players" href="/tournament/players">
+                            <IonTabButton tab="players" href="/players">
                                 <IonIcon icon={'body'} />
                                 <IonLabel>Players</IonLabel>
                             </IonTabButton>

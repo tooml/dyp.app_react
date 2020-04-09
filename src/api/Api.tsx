@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Person from '../contracts/data/Person';
 import { OptionsState } from '../state/store/OptionsStore';
-import { Tournament, SetResult, Round } from '../contracts/data/Tournament';
+import { Tournament, SetResult, Round, RankingRow } from '../contracts/data/Tournament';
 import TournamentInfo from '../contracts/data/TournamentInfo';
 
 interface PersonStockQueryResult {
@@ -32,15 +32,15 @@ interface CreateTournamentCommand {
 }
 
 interface TournamentStockQueryResult {
-    tournaments: TournamentInfo[];
+    tournaments: TournamentInfo[]
 }
 
 interface TournamentQueryResult {
-    tournament: Tournament;
+    tournament: Tournament
 }
 
 interface CreateRoundCommand {
-    tournamentId: string,
+    tournamentId: string
 }
 
 interface TournamentRoundQueryResult {
@@ -49,15 +49,18 @@ interface TournamentRoundQueryResult {
 
 interface MatchResultNotificationCommand {
     matchId: string,
-    results: SetResult[];
+    results: SetResult[]
 }
 
 interface MatchResetCommand {
-    matchId: string,
+    matchId: string
+}
+
+interface TournamentRankingQueryResult {
+    ranking: RankingRow[]
 }
 
 axios.defaults.baseURL = 'http://localhost/api/v1/';
-
 
 let axiosConfig = {
     headers: {
@@ -115,18 +118,14 @@ export const getTournaments = async () => {
 
 export const loadTournament = async (tournamentId: string) => {
     return await axios.get<TournamentQueryResult>('/tournament', {
-        params: {
-            tournamentId: tournamentId
-        }
+        params: { tournamentId: tournamentId }
     }).then(response => {
         return response.data.tournament;
     });
 }
 
 export const createRound = async (tournamentId: string) => {
-    const command: CreateRoundCommand = {
-        tournamentId: tournamentId
-    };
+    const command: CreateRoundCommand = { tournamentId: tournamentId };
     return await axios.post('/tournament/round', command, axiosConfig).then(response => {
         return response;
     });
@@ -134,9 +133,7 @@ export const createRound = async (tournamentId: string) => {
 
 export const loadLastTournamentRound = async (tournamentId: string) => {
     return await axios.get<TournamentRoundQueryResult>('/tournament/round/last', {
-        params: {
-            tournamentId: tournamentId
-        }
+        params: { tournamentId: tournamentId }
     }).then(response => {
         return response.data.round;
     });
@@ -158,5 +155,13 @@ export const resetMatchResult = async (matchId: string) => {
     };
     return await axios.post('/tournament/match/reset', command, axiosConfig).then(response => {
         return response;
+    });
+}
+
+export const getTournamentRanking = async (tournamentId: string) => {
+    return await axios.get<TournamentRankingQueryResult>('/tournament/ranking', {
+        params: { tournamentId: tournamentId }
+    }).then(response => {
+        return response.data.ranking;
     });
 }

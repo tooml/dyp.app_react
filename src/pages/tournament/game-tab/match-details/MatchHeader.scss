@@ -3,12 +3,13 @@
     grid-template-columns: 10fr 2fr;
     grid-auto-rows: auto;
     gap: 3px;
+    place-items: center;
+    justify-items: center stretch;
     grid-template-areas: 'home-team home-result' 'text empty' 'away-team away-result'
 }
 
 #match-header-container div {
     display: inline-grid;
-    place-items: center;
     font-size: large;
 }
 

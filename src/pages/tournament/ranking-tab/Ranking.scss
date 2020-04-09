@@ -1,0 +1,23 @@
+.grid {
+    font-size: x-small;
+    padding-top: 25px;
+    ion-row:nth-child(2n) {
+        background-color: var(--ion-color-secondary-tint);
+    }
+    ion-row {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+
+.header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bolder;
+    background-color: var(--ion-color-secondary-shade);
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}

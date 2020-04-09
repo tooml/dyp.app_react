@@ -1,6 +1,8 @@
-import { TournamentsActionTypes, FETCH_TOURNAMENTS, LOAD_TOURNAMENT, SELECT_MATCH, 
-         SAVE_MATCH_RESULT, NEW_ROUND, RESET_MATCH_RESULT, 
-         SaveMatchResultAction, ResetMatchResultAction } from '../actions/TournamentAction';
+import {
+  TournamentsActionTypes, FETCH_TOURNAMENTS, LOAD_TOURNAMENT, SELECT_MATCH,
+  SAVE_MATCH_RESULT, NEW_ROUND, RESET_MATCH_RESULT,
+  SaveMatchResultAction, ResetMatchResultAction, FETCH_TOURNAMENT_RANKING
+} from '../actions/TournamentAction';
 
 import { initialState, TournamentState } from './../store/TournamentStore';
 
@@ -27,6 +29,9 @@ export function tournamentReducer(tournamentsState: TournamentState = initialSta
 
     case RESET_MATCH_RESULT:
       return newState(tournamentsState, action);
+
+    case FETCH_TOURNAMENT_RANKING:
+      return { ...tournamentsState, ranking: action.payload }
 
     default:
       return tournamentsState;

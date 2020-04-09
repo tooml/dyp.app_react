@@ -22,7 +22,7 @@ const Tournaments: React.FC<RouteComponentProps> = (props) => {
 
     const _loadTournament = (tournamentId: string) => {
         dispatch(loadTournament(tournamentId));
-        props.history.push('/tournament/game');
+        props.history.push('/tournament');
     }  
     
     return (

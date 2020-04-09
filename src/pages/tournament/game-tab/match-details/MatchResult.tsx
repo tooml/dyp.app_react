@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router'
+import { withRouter } from 'react-router'
 
 import {
     IonContent, IonCardContent, IonPage, IonCardHeader, IonList, IonToolbar, IonButtons, IonButton, IonIcon, IonTitle, IonFooter, IonCard
@@ -11,24 +11,26 @@ import Header from '../../../../components/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreState } from '../../../../state/store/Store';
 import { Match, SetResult } from '../../../../contracts/data/Tournament';
-import AcceptButton from '../../../../components/buttons/AcceptButton';
 import ResetButton from '../../../../components/buttons/ResetButton';
-import useMatchSetCalculator from '../../../../hooks/MatchSetCalculator';
+import useMatchSetRule from '../../../../hooks/MatchSetRule';
+import { MatchSetParameter } from '../../../../hooks/MatchSetRule';
 
 import produce from 'immer';
 import { saveMatchResult, resetMatchResult } from '../../../../state/actions/TournamentAction';
-
 
 import { checkmarkOutline } from 'ionicons/icons';
 
 const MatchResult: React.FC = () => {
 
     const dispatch = useDispatch();
+    const tournamentId: string = useSelector((state: StoreState) => state.tournamentsState.tournament.id);
     const match: Match = useSelector((state: StoreState) => state.tournamentsState.match);
-    const { results, handleNewResults, matchValid } = useMatchSetCalculator(match.setResults, match.sets, match.drawn);
+    const {valid, results, setValid, setResults, handleSetResult} = useMatchSetRule();
 
     useEffect(() => {
-    }, [match, dispatch, results, handleNewResults, matchValid]);
+        setValid(false);
+        setResults(match.setResults);
+    },[match.setResults, setResults, setValid]);
 
 
     const setResultChange = (set: number, result: SetResult) => {
@@ -36,7 +38,8 @@ const MatchResult: React.FC = () => {
             draft.splice(set, 1, result);
         });
 
-        handleNewResults(changedSets);
+        const para: MatchSetParameter = { result: changedSets, drawn: match.drawn, sets: match.sets };
+        handleSetResult(para);
     }
 
     const applyMatchResult = () => {
@@ -44,7 +47,7 @@ const MatchResult: React.FC = () => {
             draft.setResults = results
         });
 
-        dispatch(saveMatchResult(state));
+        dispatch(saveMatchResult(state, tournamentId));
         //erzeugt fehler
         // props.history.push('/tournament/game');
     }
@@ -53,13 +56,18 @@ const MatchResult: React.FC = () => {
         const state = produce(match, draft => {
             draft.setResults = results.slice(0, match.sets).map(set => SetResult.None);
         });
-        handleNewResults(state.setResults);
-        dispatch(resetMatchResult(state));
+
+        const para: MatchSetParameter = { result: state.setResults, drawn: match.drawn, sets: match.sets };
+        handleSetResult(para);
+
+        dispatch(resetMatchResult(state, tournamentId));
     }
 
     return (
         <IonPage>
-            <Header title='Ergebnis bearbeiten' backButtonUrl='/tournament/game' />
+             {/* <p>{JSON.stringify(match.sets)}</p> 
+             <p>{JSON.stringify(results)}</p> */}
+            <Header title='Ergebnis bearbeiten' backButtonUrl='/game' />
 
             <IonCard>
                 <IonCardHeader color="secondary">
@@ -97,11 +105,11 @@ const MatchResult: React.FC = () => {
                         <IonButton type="button" expand="block"
                             shape="round"
                             color="success"
-                            disabled={!matchValid}
+                            disabled={!valid}
                             onClick={() => applyMatchResult()}>
                             <IonIcon slot="icon-only" icon={checkmarkOutline} />
                         </IonButton>
-                        <IonButton disabled={!matchValid} onClick={() => applyMatchResult()} />
+                        <IonButton disabled={!valid} onClick={() => applyMatchResult()} />
                     </IonButtons>
                 </IonToolbar>
             </IonFooter>

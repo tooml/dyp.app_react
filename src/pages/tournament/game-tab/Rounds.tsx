@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
     IonContent,
     IonList,
-    IonPage,
-    IonToolbar,
-    IonButtons,
-    IonFooter
+    IonPage
 } from '@ionic/react';
 
 import { StoreState } from '../../../state/store/Store';
@@ -21,45 +18,28 @@ import Header from '../../../components/Header';
 const Rounds: React.FC = () => {
     const dispatch = useDispatch();
     const tournament: Tournament = useSelector((state: StoreState) => state.tournamentsState.tournament);
+    const rounds = [...tournament.rounds].reverse();
 
     const _newRound = () => {
         dispatch(newRound(tournament.id));
     }
-
-    const onSelectMatch = (match: Match) => {
-        dispatch(selectMatch(match));
-    }
-
+    
     return (
         <IonPage>
             <Header title={tournament.name} backButtonUrl='' />
             <IonContent>
                 {/* {JSON.stringify(tournament)}  */}
                 <IonList>
-                    {tournament.rounds.length ?
-                        tournament.rounds.map((round: Round) => {
+                    {rounds.length ?
+                        rounds.map((round: Round) => {
                             return <MatchList key={round.id}
                                 name={round.name}
                                 matches={round.matches}
-                                selectMatch={onSelectMatch} />
+                                selectMatch={(match: Match) => dispatch(selectMatch(match))} />
                         }) : <p>Keine Einträge</p>}
                 </IonList>
-
-                {/* <IonToolbar>
-                    <IonButtons slot="end">
-                        <AddButton disabled={tournament !== null} onClick={() => _newRound()} />
-                    </IonButtons>
-
-                </IonToolbar> */}
-
-                {/* <div id="button-container">
-                    <div id="end-button">
-                        <AddButton disabled={tournament !== null} onClick={() => _newRound()} />
-                    </div>
-                </div> */}
-
-                <AddButton disabled={tournament.id.length === 0} onClick={() => _newRound()} /> 
-            </IonContent>
+                <AddButton disabled={tournament.id.length === 0} onClick={() => _newRound()} />                
+            </IonContent>            
         </IonPage>
     );
 };

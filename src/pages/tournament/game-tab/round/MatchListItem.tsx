@@ -6,7 +6,6 @@ import './MatchListItem.scss';
 import { IonItem } from '@ionic/react';
 import useMatchResult from '../../../../hooks/MatchResult';
 
-
 interface MatchListItemProps {
     match: Match;
     selectMatch: Function
@@ -17,7 +16,7 @@ const MatchListItem: React.FC<MatchListItemProps> = (props) => {
     const { home, away } = useMatchResult(props.match.setResults);
     
     return (
-        <IonItem routerLink={'/tournament/match/edit'} button={true} onClick={() => props.selectMatch(props.match)}>
+        <IonItem routerLink={'/edit'} routerDirection="forward" button={true} onClick={() => props.selectMatch(props.match)}>
             <div id="match-container">
                 <div id="table-label">Match auf Table 1</div>
 

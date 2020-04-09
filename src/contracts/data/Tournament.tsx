@@ -41,3 +41,15 @@ export interface Tournament {
 
   rounds: Round[]
 }
+
+export interface RankingRow {
+  rank: number,
+  playerName: string,
+  matches: number,
+  w: number,
+  d: number,
+  l: number,
+  points: number,
+  q1: number,
+  q2: number
+}

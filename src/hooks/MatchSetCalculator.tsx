@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import { SetResult } from '../contracts/data/Tournament';
 
-const useMatchSetCalculator = (matchResults: SetResult[], matchSetsToWin: number, drawn: boolean) => {
+const useMatchSetCalculator = () => {
+    const [matchValid, setMatchValid] = useState<boolean>();
+    const [results, setResults] = useState<SetResult[]>([]);
 
-    const [setsToWin] = useState(matchSetsToWin);
-    const [withDrawn] = useState(drawn);
-    const [matchValid, setMatchValid] = useState(false);
-    const [results, setResults] = useState(matchResults);
-
-    useEffect(() => {
+    const doIt = (sets: SetResult[], matchSetsToWin: number, withDrawn: boolean) => {
         const setCalculator = (sets: SetResult[]) => {
             const allMatchesPlayed = determineMatchState(sets);
             const winner = calculateWinner(sets);
@@ -29,7 +26,7 @@ const useMatchSetCalculator = (matchResults: SetResult[], matchSetsToWin: number
         }
 
         const noWinner = (winningHomeSets: number, winningAwaySets: number) => {
-            return (winningHomeSets < setsToWin && winningAwaySets < setsToWin)
+            return (winningHomeSets < matchSetsToWin && winningAwaySets < matchSetsToWin)
         }
 
         const drawn = (winningHomeSets: number, winningAwaySets: number) => {
@@ -63,7 +60,7 @@ const useMatchSetCalculator = (matchResults: SetResult[], matchSetsToWin: number
         const cutSets = (sets: SetResult[], matchWinner: SetResult) => {
             const cutedSets = sets.reduce((accumulator: SetResult[], result: SetResult) => {
                 const countSets = accumulator.filter(result => result === matchWinner).length;
-                if (countSets < setsToWin) return [...accumulator, result];
+                if (countSets < matchSetsToWin) return [...accumulator, result];
                 return accumulator;
             }, []);
 
@@ -71,8 +68,13 @@ const useMatchSetCalculator = (matchResults: SetResult[], matchSetsToWin: number
         }
 
         const compareSets = (sets: SetResult[]) => {
-            if (results.length === sets.length)
-                return results.filter((set: SetResult, index: number) => sets[index] !== set).length > 0;
+            console.log('compare');
+            console.log(sets);
+            console.log(results);
+            if (results.length === sets.length) {
+                const r = results.filter((set: SetResult, index: number) => sets[index] !== set);
+                return r.length > 0;
+            }
             return true;
         }
 
@@ -80,18 +82,24 @@ const useMatchSetCalculator = (matchResults: SetResult[], matchSetsToWin: number
             return matchWinner !== SetResult.None;
         }
 
-        const { newSetState, winner } = setCalculator(results); 
+        const { newSetState, winner } = setCalculator(sets); 
         const validMatchSets = matchValid(winner);
 
         if (compareSets(newSetState)) 
-            setResults(newSetState);
+            setResults(newSetState) 
         
-        setMatchValid(validMatchSets);         
+        setMatchValid(validMatchSets);       
+        
+        console.log('render ' + results);
+    }
 
-    }, [setsToWin, results, matchValid, withDrawn]);
 
-    const handleNewResults = (newSets: SetResult[]) => {
-        setResults(newSets);
+    useEffect(() => {
+
+    }, [results, matchValid]);
+
+    const handleNewResults = (matchResults: SetResult[], matchSetsToWin: number, withDrawn: boolean) => {
+        doIt(matchResults, matchSetsToWin , withDrawn);
     }
 
     return {
