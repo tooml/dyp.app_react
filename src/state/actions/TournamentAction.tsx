@@ -54,7 +54,10 @@ export type TournamentsActionTypes = FetchTournamentsAction | LoadTournamenActio
 
 export const createNewTournament = (options: OptionsState, ids: string[]) => {
     return async (dispatch: Dispatch) => {
-        api.createTournament(options, ids).then(result => console.log(result));
+        api.createTournament(options, ids)
+            .then(result => {
+                dispatch<any>(fetchTournaments())
+            })
     };
 };
 

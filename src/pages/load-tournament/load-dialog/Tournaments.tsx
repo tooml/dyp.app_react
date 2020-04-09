@@ -18,7 +18,7 @@ const Tournaments: React.FC<RouteComponentProps> = (props) => {
 
     useEffect(() => {
         dispatch(fetchTournaments());
-    }, [tournaments.length, dispatch]);
+    }, [dispatch]);
 
     const _loadTournament = (tournamentId: string) => {
         dispatch(loadTournament(tournamentId));
