@@ -12,7 +12,7 @@ import TournamentName from './pages/new-tournament/name-dialog/TournamentName';
 import TournamentOptions from './pages/new-tournament/options-dialog/TournamentOptions';
 import Competitors from './pages/new-tournament/competitors-dialog/Competitors';
 import Tournaments from './pages/load-tournament/load-dialog/Tournaments';
-import TournamentTabs from './pages/tournament/tournament-tabs';
+import TournamentTabs from './pages/tournament/TournamentTabs';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

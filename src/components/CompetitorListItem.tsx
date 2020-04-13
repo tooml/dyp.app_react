@@ -6,12 +6,12 @@ import {
     IonIcon
 } from '@ionic/react';
 
-import Competitor from '../../../contracts/data/Competitor';
-import Toggle from '../options-dialog/Toggle';
+import { Competitor } from '../contracts/data/Competitor';
+import Toggle from '../pages/new-tournament/options-dialog/Toggle';
 
 export interface CompetitorListItemProps {
     competitor: Competitor,
-    onCompeteChange: (personId: string, value: boolean) => void;
+    onCompeteChange: (competitor: Competitor) => void;
 }
 
 const CompetitorListItem: React.FC<CompetitorListItemProps> = (props) => {
@@ -22,7 +22,14 @@ const CompetitorListItem: React.FC<CompetitorListItemProps> = (props) => {
                 <h3>{props.competitor.name}</h3>
             </IonLabel>
             <Toggle label={''} checked={props.competitor.compete} 
-                    onChanged={(value: boolean) => props.onCompeteChange(props.competitor.personId, value)} />
+                    onChanged={(value: boolean) => { 
+                        const c: Competitor = { 
+                            id: props.competitor.id, 
+                            name: props.competitor.name, 
+                            compete: value 
+                        }
+                        props.onCompeteChange(c); 
+                        }} />
         </IonItem>
     );
 };

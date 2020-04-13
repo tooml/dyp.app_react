@@ -5,17 +5,20 @@
     grid-template-columns: 5fr 2fr 5fr;
     grid-auto-rows: auto;
     grid-gap: 3px;
+    margin-top: 3px;
     align-items: center;
     justify-items: center stretch;
     grid-template-areas: 'table-label table-label table-label' 'home-team result-btn away-team' 'home-team result-btn away-team'
 }
 
 #table-label {
+    padding: 2px;
     grid-area: table-label;
     background-color: var(--ion-color-secondary-tint);
 }
 
 #home-team {
+    padding: 1px;
     grid-area: home-team;
 }
 
@@ -27,5 +30,6 @@
 }
 
 #away-team {
+    padding: 1px;
     grid-area: away-team;
 }

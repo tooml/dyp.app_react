@@ -7,7 +7,7 @@ import {
 } from '@ionic/react';
 
 import { StoreState } from '../../../state/store/Store';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { RankingRow } from '../../../contracts/data/Tournament';
 

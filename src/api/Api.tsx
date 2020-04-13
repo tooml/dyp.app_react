@@ -3,6 +3,7 @@ import Person from '../contracts/data/Person';
 import { OptionsState } from '../state/store/OptionsStore';
 import { Tournament, SetResult, Round, RankingRow } from '../contracts/data/Tournament';
 import TournamentInfo from '../contracts/data/TournamentInfo';
+import { Competitor } from '../contracts/data/Competitor';
 
 interface PersonStockQueryResult {
     persons: Person[];
@@ -18,6 +19,10 @@ interface StorePersonCommand {
     id: string;
     firstName: string;
     lastName: string;
+}
+
+interface CompetitorsQueryResult {
+    competitors: Competitor[]
 }
 
 interface CreateTournamentCommand {
@@ -60,6 +65,16 @@ interface TournamentRankingQueryResult {
     ranking: RankingRow[]
 }
 
+interface TournamentCompetitorsQueryResult {
+    competitors: Competitor[]
+}
+
+interface ChangePlayersCommand {
+    tournamentId: string,
+    playerIds: string[]
+}
+
+
 axios.defaults.baseURL = 'http://localhost/api/v1/';
 
 let axiosConfig = {
@@ -91,6 +106,12 @@ export const savePersons = async (person: Person) => {
     const command: StorePersonCommand = { id: person.id, firstName: person.firstName, lastName: person.lastName };
     return await axios.post('/person', command, axiosConfig).then(response => {
         return response;
+    });
+}
+
+export const getCompetitors = async () => {
+    return await axios.get<CompetitorsQueryResult>('/competitors').then(response => {
+        return response.data.competitors;
     });
 }
 
@@ -163,5 +184,23 @@ export const getTournamentRanking = async (tournamentId: string) => {
         params: { tournamentId: tournamentId }
     }).then(response => {
         return response.data.ranking;
+    });
+}
+
+export const getTournamentCompetitors = async (tournamentId: string) => {
+    return await axios.get<TournamentCompetitorsQueryResult>('/tournament/competitors', {
+        params: { tournamentId: tournamentId }
+    }).then(response =>{
+        return response.data.competitors;
+    });
+}
+
+export const saveTournamentCompetitors = async (tournamentId: string, competitorIds: string[]) => {
+    const command: ChangePlayersCommand = {
+        tournamentId: tournamentId,
+        playerIds: competitorIds
+    };
+    return await axios.post('/tournament/players/change', command, axiosConfig).then(response => {
+        return response;
     });
 }

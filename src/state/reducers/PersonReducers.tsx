@@ -4,6 +4,7 @@ import produce from 'immer';
 
 export function personsReducer(personsState: PersonsState = initialState, action: PersonActionTypes): PersonsState {
   switch (action.type) {
+    
     case FETCH_PERSONS:
       return { ...personsState, persons: action.payload }
 

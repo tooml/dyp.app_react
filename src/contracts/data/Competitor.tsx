@@ -1,5 +1,5 @@
-export default interface Competitor {
-    personId: string,
+export interface Competitor {
+    id: string,
     name: string
     compete: boolean
 }
