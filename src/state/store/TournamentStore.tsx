@@ -22,6 +22,7 @@ export const initialState: TournamentState = {
       playerOne: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'' },
       playerTwo: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'' }
     },
+    table: 0,
     setResults: [],
   }
 }

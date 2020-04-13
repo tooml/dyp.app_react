@@ -23,6 +23,7 @@ export interface Match {
   id: string,
   home: Team,
   away: Team,
+  table: number,
   sets: number,
   drawn: boolean,
   setResults: SetResult[]
