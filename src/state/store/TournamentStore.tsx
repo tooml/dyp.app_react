@@ -1,7 +1,6 @@
 import { Tournament, Match, RankingRow } from '../../contracts/data/Tournament';
 import TournamentInfo from '../../contracts/data/TournamentInfo';
 import { initialOptions } from './OptionsStore';
-import Options from '../../contracts/data/Options';
 
 export interface TournamentState {
   tournamentsInfo: TournamentInfo[],

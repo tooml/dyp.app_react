@@ -8,7 +8,8 @@ export function messageReducer(messageState: MessageState = initialMessageState,
         ...messageState,
         id: action.payload.id,
         message: action.payload.message,
-        color: action.payload.color
+        color: action.payload.color,
+        duration: action.payload.duration
       }
 
     default:

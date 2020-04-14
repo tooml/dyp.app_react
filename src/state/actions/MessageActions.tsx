@@ -9,11 +9,12 @@ export interface ShowMessageAction {
 
 export type MessageActionTypes = ShowMessageAction
 
-export const createToastMessage = (message: string, color: string) => {
+export const createToastMessage = (message: string, color: string, duration: number) => {
     const uuidv5 = require('uuid/v4');
     return {
         id: uuidv5(),
         message: message,
-        color: color
+        color: color,
+        duration: duration
     }
 }

@@ -37,7 +37,12 @@ export const fetchPersons = () => {
                 type: FETCH_PERSONS,
                 payload: persons
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -48,7 +53,12 @@ export const newPerson = () => {
                 type: SELECT_PERSON,
                 payload: newPerson
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -69,9 +79,14 @@ export const savePerson = (person: Person) => {
         }).then(() => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success')
+                payload: createToastMessage('save', 'success', 600)
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -85,8 +100,13 @@ export const deletePerson = (person: Person) => {
         }).then(() => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success')
+                payload: createToastMessage('save', 'success', 600)
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };

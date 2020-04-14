@@ -27,8 +27,8 @@ export interface SaveTournamentCompetitorsAction {
     type: typeof SAVE_TOURNAMENT_COMPETITORS;
 }
 
-export type CompetitorsActionTypes = FetchIntitialCompetitorsAction | ToggleCompetitorAction | 
-                                     FetchTournamentCompetitorsAction | SaveTournamentCompetitorsAction;
+export type CompetitorsActionTypes = FetchIntitialCompetitorsAction | ToggleCompetitorAction |
+    FetchTournamentCompetitorsAction | SaveTournamentCompetitorsAction;
 
 export const fetchInitialCompetitors = () => {
     return async (dispatch: Dispatch) => {
@@ -57,7 +57,12 @@ export const fetchTournamentCompetitors = (tournamentId: string) => {
                 type: FETCH_TOURNAMENT_COMPETITORS,
                 payload: competitors
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -67,8 +72,13 @@ export const saveTournamentCompetitors = (tournamentId: string, competitorIds: s
             dispatch<any>(fetchTournamentCompetitors(tournamentId));
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success')
+                payload: createToastMessage('save', 'success', 600)
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };

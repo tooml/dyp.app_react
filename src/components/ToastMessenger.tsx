@@ -11,6 +11,7 @@ const ToatsMessage: React.FC = () => {
     const messageId: string = useSelector((state: StoreState) => state.messageState.id);
     const message: string = useSelector((state: StoreState) => state.messageState.message);
     const color: string = useSelector((state: StoreState) => state.messageState.color);
+    const duration: number = useSelector((state: StoreState) => state.messageState.duration);
 
     useEffect(() => {
         if (messageId) {
@@ -24,7 +25,7 @@ const ToatsMessage: React.FC = () => {
             isOpen={showToast}
             onDidDismiss={() => setShowToast(false)}
             message={message}
-            duration={600} 
+            duration={duration} 
             position="middle" />
     );
 };

@@ -105,7 +105,7 @@ let axiosConfig = {
 export const getPersons = async () => {
     return await axios.get<PersonStockQueryResult>('/person/all').then(response => {
         return response.data.persons;
-    });
+    })
 }
 
 export const getPersonTemplate = async () => {

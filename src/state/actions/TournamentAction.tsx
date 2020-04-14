@@ -100,7 +100,12 @@ export const createNewTournament = (options: Options, ids: string[]) => {
         api.createTournament(options, ids)
             .then(result => {
                 dispatch<any>(fetchTournaments())
-            })
+            }).catch((error) => {
+                dispatch<ShowMessageAction>({
+                    type: SHOW_MESSAGE,
+                    payload: createToastMessage(error, 'warning', 3000)
+                });
+            });
     };
 };
 
@@ -113,9 +118,14 @@ export const deleteTournament = (tournament: TournamentInfo) => {
             });
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success')
+                payload: createToastMessage('save', 'success', 600)
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -126,7 +136,12 @@ export const fetchTournaments = () => {
                 type: FETCH_TOURNAMENTS,
                 payload: tournaments
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -137,7 +152,12 @@ export const loadTournament = (tournamentId: string) => {
                 type: LOAD_TOURNAMENT,
                 payload: tournament
             })
-        }).then(dispatch<any>(fetchTournamentRanking(tournamentId)))
+        }).then(dispatch<any>(fetchTournamentRanking(tournamentId))).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -149,7 +169,12 @@ export const newRound = (tournamentId: string) => {
                     type: NEW_ROUND,
                     payload: round
                 });
-            })
+            }).catch((error) => {
+                dispatch<ShowMessageAction>({
+                    type: SHOW_MESSAGE,
+                    payload: createToastMessage(error, 'warning', 3000)
+                });
+            });
         });
     };
 };
@@ -172,9 +197,14 @@ export const saveMatchResult = (match: Match, tournamentId: string) => {
             dispatch<any>(fetchTournamentRanking(tournamentId));
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success')
+                payload: createToastMessage('save', 'success', 600)
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -189,9 +219,14 @@ export const resetMatchResult = (match: Match, tournamentId: string) => {
             dispatch<any>(fetchTournamentRanking(tournamentId));
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success')
+                payload: createToastMessage('save', 'success', 600)
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -202,7 +237,12 @@ export const fetchTournamentRanking = (tournamentId: string) => {
                 type: FETCH_TOURNAMENT_RANKING,
                 payload: ranking
             });
-        })
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
+            });
+        });
     };
 };
 
@@ -266,7 +306,12 @@ export const changeTournamentOptions = (tournamentId: string, options: Options) 
             dispatch<any>(fetchTournamentRanking(tournamentId));
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success')
+                payload: createToastMessage('save', 'success', 600)
+            });
+        }).catch((error) => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage(error, 'warning', 3000)
             });
         });
     }

@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router'
 
 import {
-    IonContent, IonCardContent, IonPage, IonCardHeader, IonList, IonToolbar, IonButtons, IonButton, IonIcon, IonTitle, IonFooter, IonCard
+    IonContent, IonCardContent, IonPage, IonCardHeader, 
+    IonList, IonToolbar, IonButtons, IonButton, IonIcon, 
+    IonFooter, IonCard
 } from '@ionic/react';
 
 import ResultSelection from './ResultSelection';
