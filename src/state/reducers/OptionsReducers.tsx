@@ -4,6 +4,7 @@ import {
     SET_TABLES_OPTION, SET_POINTS_OPTION, SET_POINTS_DRAWN_OPTION, SET_SETS_OPTION,
     SET_WALKOVER_OPTION
 } from "../actions/OptionsActions";
+import produce from "immer";
 
 export function optionsReducer(optionsState: OptionsState = initialState, action: OptionsActionTypes): OptionsState {
     switch (action.type) {
@@ -11,25 +12,38 @@ export function optionsReducer(optionsState: OptionsState = initialState, action
             return initialState;
 
         case SET_TOURNAMENT_NAME:
-            return { ...optionsState, tournamentName: action.payload }
+            return produce(optionsState, draft => {
+                draft.options.tournamentName = action.payload;
+            });
 
         case SET_TABLES_OPTION:
-            return { ...optionsState, tables: action.payload }
+            return produce(optionsState, draft => {
+                draft.options.tables = action.payload;
+            });
 
         case SET_POINTS_OPTION:
-            return { ...optionsState, points: action.payload }
+            return produce(optionsState, draft => {
+                draft.options.points = action.payload;
+            });
 
         case SET_POINTS_DRAWN_OPTION:
-            return { ...optionsState, pointsDrawn: action.payload }
+            return produce(optionsState, draft => {
+                draft.options.pointsDrawn = action.payload;
+            });
 
         case SET_DRAWN_OPTION:
-            return { ...optionsState, drawn: action.payload }
+            return produce(optionsState, draft => {
+                draft.options.drawn = action.payload;
+            });
 
         case SET_SETS_OPTION:
-            return { ...optionsState, sets: action.payload }
-
+            return produce(optionsState, draft => {
+                draft.options.sets = action.payload;
+            });
         case SET_WALKOVER_OPTION:
-            return { ...optionsState, walkover: action.payload }
+            return produce(optionsState, draft => {
+                draft.options.walkover = action.payload;
+            });
 
         default:
             return optionsState;

@@ -7,7 +7,7 @@ import {
 } from '@ionic/react';
 
 import { Competitor } from '../contracts/data/Competitor';
-import Toggle from '../pages/new-tournament/options-dialog/Toggle';
+import Toggle from './Toggle';
 
 export interface CompetitorListItemProps {
     competitor: Competitor,

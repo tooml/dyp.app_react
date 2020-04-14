@@ -1,6 +1,6 @@
 import React from "react";
 
-import './styles/SelectOption.css';
+import './SelectOption.scss';
 
 import {
     IonItem,
@@ -8,7 +8,7 @@ import {
     IonSelect,
     IonSelectOption
 } from "@ionic/react";
-import Dictionary from "./contracts/Options";
+import Dictionary from "../contracts/OptionsSelection";
 
 export interface SelectionProps {
     label: string,

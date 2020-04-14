@@ -2,6 +2,7 @@ import Person from '../../contracts/data/Person';
 import { Dispatch } from 'redux';
 import * as api from '../../api/Api'
 import { Competitor } from '../../contracts/data/Competitor';
+import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
 
 export const FETCH_INITIAL_COMPETITORS = 'FETCH_INITIAL_COMPETITORS'
 export const TOGGLE_COMPETITOR = 'TOGGLE_COMPETITOR'
@@ -65,7 +66,10 @@ export const saveTournamentCompetitors = (tournamentId: string, competitorIds: s
     return async (dispatch: Dispatch) => {
         api.saveTournamentCompetitors(tournamentId, competitorIds).then(result => {
             dispatch<any>(fetchTournamentCompetitors(tournamentId));
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage('save', 'success')
+            });
         })
     };
 };
-

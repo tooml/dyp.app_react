@@ -1,7 +1,9 @@
 import {
   TournamentsActionTypes, FETCH_TOURNAMENTS, LOAD_TOURNAMENT, SELECT_MATCH,
   SAVE_MATCH_RESULT, NEW_ROUND, RESET_MATCH_RESULT,
-  SaveMatchResultAction, ResetMatchResultAction, FETCH_TOURNAMENT_RANKING
+  SaveMatchResultAction, ResetMatchResultAction, FETCH_TOURNAMENT_RANKING, 
+  SET_TOURNAMENT_TABLES_OPTION, SET_TOURNAMENT_POINTS_OPTION, SET_TOURNAMENT_POINTS_DRAWN_OPTION, 
+  SET_TOURNAMENT_DRAWN_OPTION, SET_TOURNAMENT_SETS_OPTION, SET_TOURNAMENT_WALKOVER_OPTION
 } from '../actions/TournamentAction';
 
 import { initialState, TournamentState } from './../store/TournamentStore';
@@ -32,6 +34,36 @@ export function tournamentReducer(tournamentsState: TournamentState = initialSta
 
     case FETCH_TOURNAMENT_RANKING:
       return { ...tournamentsState, ranking: action.payload }
+
+    case SET_TOURNAMENT_TABLES_OPTION:
+      return produce(tournamentsState, draft => {
+        draft.tournament.options.tables = action.payload;
+      });
+
+    case SET_TOURNAMENT_POINTS_OPTION:
+      return produce(tournamentsState, draft => {
+        draft.tournament.options.points = action.payload;
+      });
+
+    case SET_TOURNAMENT_POINTS_DRAWN_OPTION:
+      return produce(tournamentsState, draft => {
+        draft.tournament.options.pointsDrawn = action.payload;
+      });
+
+    case SET_TOURNAMENT_DRAWN_OPTION:
+      return produce(tournamentsState, draft => {
+        draft.tournament.options.drawn = action.payload;
+      });
+
+    case SET_TOURNAMENT_SETS_OPTION:
+      return produce(tournamentsState, draft => {
+        draft.tournament.options.sets = action.payload;
+      });
+
+    case SET_TOURNAMENT_WALKOVER_OPTION:
+      return produce(tournamentsState, draft => {
+        draft.tournament.options.walkover = action.payload;
+      });
 
     default:
       return tournamentsState;

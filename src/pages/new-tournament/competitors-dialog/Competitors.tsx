@@ -5,19 +5,18 @@ import { RouteComponentProps, withRouter } from 'react-router';
 
 import { toggleCompetitor, fetchInitialCompetitors } from '../../../state/actions/CompetitorActions';
 import { createNewTournament } from '../../../state/actions/TournamentAction';
-import { OptionsState } from '../../../state/store/OptionsStore';
-
 import { IonContent, IonPage } from '@ionic/react';
 
 import Header from '../../../components/Header';
 import CompetitorsList from '../../../components/CompetitorsList';
 import AcceptButton from '../../../components/buttons/AcceptButton';
 import { Competitor } from '../../../contracts/data/Competitor';
+import Options from '../../../contracts/data/Options';
 
 const Competitors: React.FC<RouteComponentProps> = (props) => {
 
     const dispatch = useDispatch();
-    const storeOptions: OptionsState = useSelector((state: StoreState) => state.optionsState);
+    const options: Options = useSelector((state: StoreState) => state.optionsState.options);
     const competitors: Competitor[] = useSelector((state: StoreState) => state.competitorsState.competitors);
 
     useEffect(() => {
@@ -30,7 +29,7 @@ const Competitors: React.FC<RouteComponentProps> = (props) => {
 
     const createTournament = () => {
         const personIds = competitors.filter(competitor => competitor.compete).map(competitor => competitor.id);
-        dispatch(createNewTournament(storeOptions, personIds));
+        dispatch(createNewTournament(options, personIds));
         props.history.push('/load');
     }
 

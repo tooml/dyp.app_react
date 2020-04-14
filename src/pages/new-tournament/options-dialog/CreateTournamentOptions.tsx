@@ -2,26 +2,18 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-    IonContent,
-    IonPage,
-    IonItemGroup,
-    IonLabel,
-    IonItemDivider
-} from '@ionic/react';
+import { IonPage } from '@ionic/react';
 
 import Header from '../../../components/Header';
-import Selection from './Selection';
-import Toggle from './Toggle';
 import { StoreState } from '../../../state/store/Store';
 import {
     setTablesOption, setPointsOption, setPointsDrawnOption,
     setDrawnOption, setSetsOption, setWalkoverOption
 } from '../../../state/actions/OptionsActions';
-import { OptionsState } from '../../../state/store/OptionsStore';
-import Dictionary, { optionsCreator } from './contracts/Options';
-import AcceptButton from '../../../components/buttons/AcceptButton';
 import { RouteComponentProps, withRouter } from 'react-router';
+import Options from '../../../contracts/data/Options';
+import AcceptButton from '../../../components/buttons/AcceptButton';
+import OptionsOverview from '../../../components/OptionsOverview';
 
 export interface OptionDefenition {
     name: string
@@ -29,14 +21,10 @@ export interface OptionDefenition {
     values: string[],
 }
 
-const TournamentOptions: React.FC<RouteComponentProps> = (props) => {
+const CreateTournamentOptions: React.FC<RouteComponentProps> = (props) => {
 
-    const dispatchStore = useDispatch();
-    const storeOptions: OptionsState = useSelector((state: StoreState) => state.optionsState);
-
-    const tableOptions: Dictionary<string, string>[] = optionsCreator('Tisch', 'Tische');
-    const pointOptions: Dictionary<string, string>[] = optionsCreator('Punkt', 'Punkte');
-    const setOptions: Dictionary<string, string>[] = optionsCreator('Satz', 'Sätze');
+    const dispatch = useDispatch();
+    const options: Options = useSelector((state: StoreState) => state.optionsState.options);
 
     const pushOptionsToStore = () => {
         props.history.push('/new/competitors');
@@ -46,8 +34,17 @@ const TournamentOptions: React.FC<RouteComponentProps> = (props) => {
         <IonPage>
             <Header title='Optionen' backButtonUrl='/new' />
 
-            <IonContent>
-                {/* <p>{JSON.stringify(tableOptions)}</p> */}
+            <OptionsOverview
+                options={options}
+                changeTables={(value: number) => dispatch(setTablesOption(value))}
+                changePoints={(value: number) => dispatch(setPointsOption(value))}
+                changePointsDrawn={(value: number) => dispatch(setPointsDrawnOption(value))}
+                changeDrawn={(value: boolean) => dispatch(setDrawnOption(value))}
+                changeSets={(value: number) => dispatch(setSetsOption(value))}
+                setWalkover={(value: boolean) => dispatch(setWalkoverOption(value))}
+            />
+            <AcceptButton disabled={false} onClick={pushOptionsToStore} />
+            {/* <IonContent>
                 <IonItemGroup>
                     <IonItemDivider>
                         <IonLabel>Tische</IonLabel>
@@ -55,9 +52,9 @@ const TournamentOptions: React.FC<RouteComponentProps> = (props) => {
 
                     <Selection label={'Tables'}
                         options={tableOptions}
-                        selected={String(storeOptions.tables)}
+                        selected={String(options.tables)}
                         disabled={false}
-                        onChanged={value => dispatchStore(setTablesOption(value))} />
+                        onChanged={value => dispatch(setTablesOption(value))} />
                 </IonItemGroup>
 
                 <IonItemGroup>
@@ -67,19 +64,19 @@ const TournamentOptions: React.FC<RouteComponentProps> = (props) => {
 
                     <Selection label={'Points'}
                         options={pointOptions}
-                        selected={String(storeOptions.points)}
+                        selected={String(options.points)}
                         disabled={false}
-                        onChanged={value => dispatchStore(setPointsOption(value))} />
+                        onChanged={value => dispatch(setPointsOption(value))} />
 
                     <Selection label={'Points Drawn'}
                         options={pointOptions}
-                        selected={String(storeOptions.pointsDrawn)}
-                        disabled={!storeOptions.drawn}
-                        onChanged={value => dispatchStore(setPointsDrawnOption(value))} />
+                        selected={String(options.pointsDrawn)}
+                        disabled={!options.drawn}
+                        onChanged={value => dispatch(setPointsDrawnOption(value))} />
 
                     <Toggle label={'Drawn'}
-                        checked={storeOptions.drawn}
-                        onChanged={value => dispatchStore(setDrawnOption(value))} />
+                        checked={options.drawn}
+                        onChanged={value => dispatch(setDrawnOption(value))} />
                 </IonItemGroup>
 
                 <IonItemGroup>
@@ -89,9 +86,9 @@ const TournamentOptions: React.FC<RouteComponentProps> = (props) => {
 
                     <Selection label={'Gewinnsätze'}
                         options={setOptions}
-                        selected={String(storeOptions.sets)}
+                        selected={String(options.sets)}
                         disabled={false}
-                        onChanged={value => dispatchStore(setSetsOption(value))} />
+                        onChanged={value => dispatch(setSetsOption(value))} />
                 </IonItemGroup>
 
                 <IonItemGroup>
@@ -100,14 +97,14 @@ const TournamentOptions: React.FC<RouteComponentProps> = (props) => {
                     </IonItemDivider>
 
                     <Toggle label={'Freiloswertung'}
-                        checked={storeOptions.walkover}
-                        onChanged={value => dispatchStore(setWalkoverOption(value))} />
+                        checked={options.walkover}
+                        onChanged={value => dispatch(setWalkoverOption(value))} />
                 </IonItemGroup>
 
                 <AcceptButton disabled={false} onClick={pushOptionsToStore} />
-            </IonContent>
+            </IonContent> */}
         </IonPage>
     );
 };
 
-export default withRouter(TournamentOptions);
+export default withRouter(CreateTournamentOptions);

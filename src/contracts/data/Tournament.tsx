@@ -1,10 +1,11 @@
+import Options from "./Options";
+
 export interface Player {
   id: string,
   firstName: string,
   lastName: string,
   fullName: string,
   fullNameShort: string
-
 }
 
 export interface Team {
@@ -39,7 +40,7 @@ export interface Tournament {
   id: string,
   name: string,
   created: string,
-
+  options: Options,
   rounds: Round[]
 }
 

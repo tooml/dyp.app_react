@@ -9,7 +9,7 @@ import Home from './pages/home/Home';
 import Persons from './pages/persons-management/persons/Persons';
 import PersonEdit from './pages/persons-management/persons/PersonEdit';
 import TournamentName from './pages/new-tournament/name-dialog/TournamentName';
-import TournamentOptions from './pages/new-tournament/options-dialog/TournamentOptions';
+import TournamentOptions from './pages/new-tournament/options-dialog/CreateTournamentOptions';
 import Competitors from './pages/new-tournament/competitors-dialog/Competitors';
 import Tournaments from './pages/load-tournament/load-dialog/Tournaments';
 import TournamentTabs from './pages/tournament/TournamentTabs';
@@ -37,55 +37,67 @@ import './theme/variables.css';
 
 import ToatsMessage from './components/ToastMessenger';
 import { homeOutline, list } from 'ionicons/icons';
+import { useSelector } from 'react-redux';
+import { StoreState } from './state/store/Store';
 
-const appPages: AppPage[] = [
-  {
-    title: 'Home',
-    url: '/home',
-    icon: homeOutline
-  },
-  {
-    title: 'Persons',
-    url: '/persons',
-    icon: list
-  },
-  {
-    title: 'New Tournament',
-    url: '/new',
-    icon: list
-  },
-  {
-    title: 'Load Tournament',
-    url: '/load',
-    icon: list
-  },
-  {
-    title: 'Tournament',
-    url: '/tournament',
-    icon: list
-  }
-];
+const App: React.FC = () => {
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonSplitPane contentId="main">
-        <Menu appPages={appPages} />
-        <IonRouterOutlet id="main">
-          <Route path="/home" component={Home} />
-          <Route path="/persons" component={Persons} />
-          <Route path="/edit/person" component={PersonEdit} />
-          <Route path="/new/options" component={TournamentOptions} />
-          <Route path="/new/competitors" component={Competitors} />
-          <Route path="/new" component={TournamentName} />
-          <Route path="/load" component={Tournaments} />
-          <Route path="/tournament" component={TournamentTabs} />
-          <Route path="/" render={() => <Redirect to="/home" />} />
-        </IonRouterOutlet>  
-        <ToatsMessage />
-      </IonSplitPane>
-    </IonReactRouter>
-  </IonApp>
-);
+  const tournamentId: string = useSelector((state: StoreState) => state.tournamentsState.tournament.id);
+
+  console.log(tournamentId);
+  const appPages: AppPage[] = [
+    {
+      title: 'Home',
+      url: '/home',
+      icon: homeOutline,
+      disabled: false
+    },
+    {
+      title: 'Persons',
+      url: '/persons',
+      icon: list,
+      disabled: false
+    },
+    {
+      title: 'New Tournament',
+      url: '/new',
+      icon: list,
+      disabled: false
+    },
+    {
+      title: 'Load Tournament',
+      url: '/load',
+      icon: list,
+      disabled: false
+    },
+    {
+      title: 'Tournament',
+      url: '/tournament',
+      icon: list,
+      disabled: tournamentId.length === 0
+    }
+  ];
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonSplitPane contentId="main">
+          <Menu appPages={appPages} />
+          <IonRouterOutlet id="main">
+            <Route path="/home" component={Home} />
+            <Route path="/persons" component={Persons} />
+            <Route path="/edit/person" component={PersonEdit} />
+            <Route path="/new/options" component={TournamentOptions} />
+            <Route path="/new/competitors" component={Competitors} />
+            <Route path="/new" component={TournamentName} />
+            <Route path="/load" component={Tournaments} />
+            <Route path="/tournament" component={TournamentTabs} />
+            <Route path="/" render={() => <Redirect to="/home" />} />
+          </IonRouterOutlet>
+          <ToatsMessage />
+        </IonSplitPane>
+      </IonReactRouter>
+    </IonApp>)
+};
 
 export default App;

@@ -22,7 +22,6 @@ const Players: React.FC<RouteComponentProps> = (props) => {
     const tournamentName: string = useSelector((state: StoreState) => state.tournamentsState.tournament.name);
     const competitors: Competitor[] = useSelector((state: StoreState) => state.competitorsState.competitors);
 
-    //Wird leider immer ausgeführt
     useEffect(() => {
         dispatch(fetchTournamentCompetitors(tournamentId));
     }, [props, competitors.length, tournamentId, dispatch]);
@@ -31,8 +30,8 @@ const Players: React.FC<RouteComponentProps> = (props) => {
         dispatch(toggleCompetitor(competitor));
     }
 
-    const save = () => {
-        const ids = competitors.filter(competitor => competitor.compete).map(x => x.id);
+    const _saveCompetitors = () => {
+        const ids = competitors.filter(competitor => competitor.compete).map(c => c.id);
         dispatch(saveTournamentCompetitors(tournamentId, ids));
     }
 
@@ -41,7 +40,7 @@ const Players: React.FC<RouteComponentProps> = (props) => {
             <Header title={tournamentName} backButtonUrl='' />
             <IonContent>
                 <CompetitorsList competitors={competitors} onCompeteChange={_toggleCompetitor} />
-                <AcceptButton disabled={competitors.filter(c => c.compete).length < 4} onClick={save} />
+                <AcceptButton disabled={competitors.filter(c => c.compete).length < 4} onClick={_saveCompetitors} />
             </IonContent>
         </IonPage>
     );

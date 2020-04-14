@@ -1,15 +1,10 @@
+import Options from '../../contracts/data/Options';
 
 export interface OptionsState {
-    tournamentName: string,
-    tables: number,
-    points: number,
-    pointsDrawn: number,
-    drawn: boolean,
-    sets: number,
-    walkover: boolean
+    options: Options
 }
 
-export const initialState: OptionsState = {
+export const initialOptions: Options = {
     tournamentName: '',
     tables: 1,
     points: 2,
@@ -17,4 +12,8 @@ export const initialState: OptionsState = {
     drawn: false,
     sets: 2,
     walkover: true
+} 
+
+export const initialState: OptionsState = {
+    options: initialOptions
 }

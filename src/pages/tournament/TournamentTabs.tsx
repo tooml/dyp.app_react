@@ -10,23 +10,11 @@ import { IonReactRouter } from '@ionic/react-router';
 
 import { football, list, settings, body } from 'ionicons/icons';
 
-import Header from '../../components/Header';
 import Rounds from './game-tab/Rounds';
 import Ranking from './ranking-tab/Ranking';
 import Players from './players-tab/Players';
+import Options from './option-tab/TournamentOptions';
 import MatchResult from './game-tab/match-details/MatchResult';
-
-
-const pagethree: React.FC = () => {
-    return (
-        <IonPage>
-            <Header title='pagethree' backButtonUrl=''/>
-            <IonContent>
-                <h1>pagethree</h1>
-            </IonContent>
-        </IonPage>);
-}
-
 
 const TournamentTabs: React.FC = () => {
     return (
@@ -38,7 +26,7 @@ const TournamentTabs: React.FC = () => {
                             <Route path="/game"  render={() => <Rounds  />} exact={true}/>
                             <Route path="/edit" render={() => <MatchResult  />} exact={true} />
                             <Route path="/ranking" component={Ranking} exact={true}/>
-                            <Route path="/options" component={pagethree} exact={true}/>
+                            <Route path="/options" component={Options} exact={true}/>
                             <Route path="/players"  component={Players} exact={true}/>
                             <Route path="/tournament" render={() => <Redirect to="/game" />} />
                             {/* https://github.com/aaronksaunders/ionic-react-tabs-tut */}

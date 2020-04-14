@@ -52,7 +52,7 @@ export type OptionsActionTypes = FetchOptionsAction | SetTournamentNameAction | 
     SetTablesOptionAction | SetPointsOptionAction | SetPointsDrawnOptionAction | SetSetsOptionAction |
     SetWalkoverOptionAction
 
-export const fetchOptions = () => {
+export const fetchInitialOptions = () => {
     return async (dispatch: Dispatch) => {
         dispatch<FetchOptionsAction>({
             type: FETCH_OPTIONS

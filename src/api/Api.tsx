@@ -1,9 +1,9 @@
 import axios from 'axios';
 import Person from '../contracts/data/Person';
-import { OptionsState } from '../state/store/OptionsStore';
 import { Tournament, SetResult, Round, RankingRow } from '../contracts/data/Tournament';
 import TournamentInfo from '../contracts/data/TournamentInfo';
 import { Competitor } from '../contracts/data/Competitor';
+import Options from '../contracts/data/Options';
 
 interface PersonStockQueryResult {
     persons: Person[];
@@ -74,6 +74,16 @@ interface ChangePlayersCommand {
     playerIds: string[]
 }
 
+interface ChangeOptionsCommand {
+    tournamentId: string,
+    tables: number;
+    sets: number;
+    points: number;
+    pointsDrawn: number;
+    drawn: boolean;
+    walkover: boolean;
+}
+
 
 axios.defaults.baseURL = 'http://localhost/api/v1/';
 
@@ -115,7 +125,7 @@ export const getCompetitors = async () => {
     });
 }
 
-export const createTournament = async (opitions: OptionsState, competitors: string[]) => {
+export const createTournament = async (opitions: Options, competitors: string[]) => {
     const command: CreateTournamentCommand = {
         name: opitions.tournamentName,
         tables: opitions.tables,
@@ -201,6 +211,21 @@ export const saveTournamentCompetitors = async (tournamentId: string, competitor
         playerIds: competitorIds
     };
     return await axios.post('/tournament/players/change', command, axiosConfig).then(response => {
+        return response;
+    });
+}
+
+export const saveTournamentOptions = async (tournamentId: string, options: Options) => {
+    const command: ChangeOptionsCommand = {
+        tournamentId: tournamentId,
+        tables: options.tables,
+        sets: options.sets,
+        points: options.points,
+        pointsDrawn: options.pointsDrawn,
+        drawn: options.drawn,
+        walkover: options.walkover,
+    };
+    return await axios.post('/tournament/options/change', command, axiosConfig).then(response => {
         return response;
     });
 }

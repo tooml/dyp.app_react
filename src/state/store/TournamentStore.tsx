@@ -1,5 +1,7 @@
 import { Tournament, Match, RankingRow } from '../../contracts/data/Tournament';
 import TournamentInfo from '../../contracts/data/TournamentInfo';
+import { initialOptions } from './OptionsStore';
+import Options from '../../contracts/data/Options';
 
 export interface TournamentState {
   tournamentsInfo: TournamentInfo[],
@@ -10,7 +12,7 @@ export interface TournamentState {
 
 export const initialState: TournamentState = {
   tournamentsInfo: [],
-  tournament: { id: '', name: '', created: '', rounds: [] },
+  tournament: { id: '', name: '', created: '', options: initialOptions, rounds: [] },
   ranking: [],
   match: {
     id: '', sets: 0, drawn: false,
