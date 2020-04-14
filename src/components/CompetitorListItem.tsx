@@ -8,6 +8,7 @@ import {
 
 import { Competitor } from '../contracts/data/Competitor';
 import Toggle from './Toggle';
+import { personOutline } from 'ionicons/icons';
 
 export interface CompetitorListItemProps {
     competitor: Competitor,
@@ -17,7 +18,7 @@ export interface CompetitorListItemProps {
 const CompetitorListItem: React.FC<CompetitorListItemProps> = (props) => {
     return (
         <IonItem>
-            <IonIcon slot="start" size="large" color="medium" icon={'contact'} />
+            <IonIcon slot="start" size="large" color="medium" icon={personOutline} />
             <IonLabel>
                 <h3>{props.competitor.name}</h3>
             </IonLabel>

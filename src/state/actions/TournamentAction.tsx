@@ -6,6 +6,7 @@ import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageAc
 import Options from '../../contracts/data/Options';
 
 export const FETCH_TOURNAMENTS = 'FETCH_TOURNAMENTS'
+export const DELETE_TOURNAMENT = 'DELETE_TOURNAMENT'
 export const LOAD_TOURNAMENT = 'LOAD_TOURNAMENT'
 export const NEW_ROUND = 'NEW_ROUND'
 export const SELECT_MATCH = 'SELECT_MATCH'
@@ -22,6 +23,11 @@ export const SET_TOURNAMENT_WALKOVER_OPTION = 'SET_TOURNAMENT_WALKOVER_OPTION'
 export interface FetchTournamentsAction {
     type: typeof FETCH_TOURNAMENTS;
     payload: TournamentInfo[];
+}
+
+export interface DeleteTournamentAction {
+    type: typeof DELETE_TOURNAMENT;
+    payload: TournamentInfo;
 }
 
 export interface LoadTournamenAction {
@@ -84,7 +90,7 @@ export interface SetTournamentWalkoverOptionAction {
     payload: boolean;
 }
 
-export type TournamentsActionTypes = FetchTournamentsAction | LoadTournamenAction |
+export type TournamentsActionTypes = FetchTournamentsAction | DeleteTournamentAction | LoadTournamenAction |
     NewRoundAction | SelectMatchAction | SaveMatchResultAction | ResetMatchResultAction | FetchTournamentRankingAction |
     SetTournamentTablesOptionAction | SetTournamentPointsOptionAction | SetTournamentPointsDrawnOptionAction |
     SetTournamentDrawnOptionAction | SetTournamentSetsOptionAction | SetTournamentWalkoverOptionAction
@@ -95,6 +101,21 @@ export const createNewTournament = (options: Options, ids: string[]) => {
             .then(result => {
                 dispatch<any>(fetchTournaments())
             })
+    };
+};
+
+export const deleteTournament = (tournament: TournamentInfo) => {
+    return async (dispatch: Dispatch) => {
+        api.delteTournament(tournament.id).then(result => {
+            dispatch<DeleteTournamentAction>({
+                type: DELETE_TOURNAMENT,
+                payload: tournament
+            });
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage('save', 'success')
+            });
+        })
     };
 };
 

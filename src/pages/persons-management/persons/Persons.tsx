@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { RouteComponentProps } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPersons, selectPerson, newPerson } from '../../../state/actions/PersonActions';
+import { fetchPersons, selectPerson, newPerson, deletePerson } from '../../../state/actions/PersonActions';
 import Person from '../../../contracts/data/Person';
 import { StoreState } from '../../../state/store/Store';
 
@@ -26,6 +26,10 @@ const Persons: React.FC<RouteComponentProps> = (props) => {
         dispatch(selectPerson(person));
     }
 
+    const onDeltePerson = (person: Person) => {
+        dispatch(deletePerson(person));
+    }
+
     useEffect(() => {
         dispatch(fetchPersons());
     }, [persons.length, dispatch]);
@@ -34,9 +38,11 @@ const Persons: React.FC<RouteComponentProps> = (props) => {
         <IonPage>
             <Header title='Persons' backButtonUrl='' />
             <IonContent>
-                <PersonsList persons={persons} selectPerson={onSelectPerson} />
+                <PersonsList persons={persons}
+                    selectPerson={onSelectPerson}
+                    deletePerson={onDeltePerson} />
                 <AddButton onClick={onNewPerson} disabled={false} />
-            </IonContent>         
+            </IonContent>
         </IonPage>
     );
 };

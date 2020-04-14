@@ -1,4 +1,3 @@
-import Person from '../../contracts/data/Person';
 import { Dispatch } from 'redux';
 import * as api from '../../api/Api'
 import { Competitor } from '../../contracts/data/Competitor';

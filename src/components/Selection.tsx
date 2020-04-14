@@ -1,13 +1,12 @@
 import React from "react";
 
-import './SelectOption.scss';
-
 import {
     IonItem,
     IonLabel,
     IonSelect,
     IonSelectOption
 } from "@ionic/react";
+
 import Dictionary from "../contracts/OptionsSelection";
 
 export interface SelectionProps {
@@ -21,7 +20,7 @@ export interface SelectionProps {
 const Selection: React.FC<SelectionProps> = (props) => {
 
     return (
-        <IonItem lines="none">
+        <IonItem lines="none" slot="start">
             <IonLabel>{props.label}</IonLabel>
             <IonSelect placeholder="Select one" 
                 disabled={props.disabled} 

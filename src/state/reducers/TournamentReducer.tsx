@@ -1,9 +1,9 @@
 import {
   TournamentsActionTypes, FETCH_TOURNAMENTS, LOAD_TOURNAMENT, SELECT_MATCH,
   SAVE_MATCH_RESULT, NEW_ROUND, RESET_MATCH_RESULT,
-  SaveMatchResultAction, ResetMatchResultAction, FETCH_TOURNAMENT_RANKING, 
-  SET_TOURNAMENT_TABLES_OPTION, SET_TOURNAMENT_POINTS_OPTION, SET_TOURNAMENT_POINTS_DRAWN_OPTION, 
-  SET_TOURNAMENT_DRAWN_OPTION, SET_TOURNAMENT_SETS_OPTION, SET_TOURNAMENT_WALKOVER_OPTION
+  SaveMatchResultAction, ResetMatchResultAction, FETCH_TOURNAMENT_RANKING,
+  SET_TOURNAMENT_TABLES_OPTION, SET_TOURNAMENT_POINTS_OPTION, SET_TOURNAMENT_POINTS_DRAWN_OPTION,
+  SET_TOURNAMENT_DRAWN_OPTION, SET_TOURNAMENT_SETS_OPTION, SET_TOURNAMENT_WALKOVER_OPTION, DELETE_TOURNAMENT
 } from '../actions/TournamentAction';
 
 import { initialState, TournamentState } from './../store/TournamentStore';
@@ -14,6 +14,12 @@ export function tournamentReducer(tournamentsState: TournamentState = initialSta
   switch (action.type) {
     case FETCH_TOURNAMENTS:
       return { ...tournamentsState, tournamentsInfo: action.payload }
+
+    case DELETE_TOURNAMENT:
+      const delete_index = tournamentsState.tournamentsInfo.findIndex(t => t.id === action.payload.id);
+      return produce(tournamentsState, draft => {
+        draft.tournamentsInfo.splice(delete_index, 1);
+      });
 
     case LOAD_TOURNAMENT:
       return { ...tournamentsState, tournament: action.payload }

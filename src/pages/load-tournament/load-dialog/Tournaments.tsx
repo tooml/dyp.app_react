@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import Header from '../../../components/Header';
 import TournamentsList from './TournamentsList';
 
-import {  IonPage, IonContent } from '@ionic/react';
+import { IonPage, IonContent } from '@ionic/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StoreState } from '../../../state/store/Store';
-import { fetchTournaments, loadTournament } from '../../../state/actions/TournamentAction';
+import { fetchTournaments, loadTournament, deleteTournament } from '../../../state/actions/TournamentAction';
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import TournamentInfo from '../../../contracts/data/TournamentInfo';
@@ -23,14 +23,20 @@ const Tournaments: React.FC<RouteComponentProps> = (props) => {
     const _loadTournament = (tournamentId: string) => {
         dispatch(loadTournament(tournamentId));
         props.history.push('/tournament');
-    }  
-    
+    }
+
+    const _deleteTournament = (tournament: TournamentInfo) => {
+        dispatch(deleteTournament(tournament));
+    }
+
     return (
         <IonPage>
-            <Header title='Turnier laden' backButtonUrl=''/>
-            
+            <Header title='Turnier laden' backButtonUrl='' />
+
             <IonContent>
-                <TournamentsList tournaments={tournaments} loadTournament={_loadTournament} />
+                <TournamentsList tournaments={tournaments}
+                    loadTournament={_loadTournament}
+                    deleteTournament={_deleteTournament} />
             </IonContent>
         </IonPage>
     );

@@ -6,7 +6,8 @@ import TournamentItem from './TournamentItem';
 
 interface TournamentsListProps {
     tournaments: TournamentInfo[],
-    loadTournament: Function
+    loadTournament: Function,
+    deleteTournament: Function
 }
 
 const TournamentsList: React.FC<TournamentsListProps> = (props) => {
@@ -17,7 +18,8 @@ const TournamentsList: React.FC<TournamentsListProps> = (props) => {
                     props.tournaments.map((tournament: TournamentInfo) => {
                         return <TournamentItem key={tournament.id} 
                                                tournament={tournament} 
-                                               loadTournament={props.loadTournament} />
+                                               loadTournament={props.loadTournament}
+                                               deleteTournament={props.deleteTournament} />
                     }) : <p>Keine Einträge {props.tournaments.length}</p>}
             </IonList>
         </IonContent>

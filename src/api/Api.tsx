@@ -21,6 +21,10 @@ interface StorePersonCommand {
     lastName: string;
 }
 
+interface DeletePersonCommand {
+    id: string;
+}
+
 interface CompetitorsQueryResult {
     competitors: Competitor[]
 }
@@ -34,6 +38,10 @@ interface CreateTournamentCommand {
     sets: number,
     walkover: boolean,
     competitorsIds: string[]
+}
+
+interface DeleteTournamentCommand {
+    id: string;
 }
 
 interface TournamentStockQueryResult {
@@ -119,6 +127,13 @@ export const savePersons = async (person: Person) => {
     });
 }
 
+export const deltePerson = async (id: string) => {
+    const command: DeletePersonCommand = { id: id };
+    return await axios.post('/person/delete', command, axiosConfig).then(response => {
+        return response;
+    });
+}
+
 export const getCompetitors = async () => {
     return await axios.get<CompetitorsQueryResult>('/competitors').then(response => {
         return response.data.competitors;
@@ -140,6 +155,14 @@ export const createTournament = async (opitions: Options, competitors: string[])
         return response;
     });
 }
+
+export const delteTournament = async (id: string) => {
+    const command: DeleteTournamentCommand = { id: id };
+    return await axios.post('/tournament/delete', command, axiosConfig).then(response => {
+        return response;
+    });
+}
+
 
 export const getTournaments = async () => {
     return await axios.get<TournamentStockQueryResult>('/tournament/all').then(response => {

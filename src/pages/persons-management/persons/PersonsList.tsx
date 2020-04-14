@@ -6,8 +6,9 @@ import PersonListItem from './PersonListItem';
 import { IonContent, IonList } from '@ionic/react';
 
 interface PersonListProps {
-    persons: Person[]
-    selectPerson: Function
+    persons: Person[],
+    selectPerson: Function,
+    deletePerson: Function
 }
 
 const PersonsList: React.FC<PersonListProps> = (props) => {
@@ -20,6 +21,7 @@ const PersonsList: React.FC<PersonListProps> = (props) => {
                         return <PersonListItem key={person.id}
                             person={person}
                             selectPerson={props.selectPerson}
+                            deletePerson={props.deletePerson}
                         />
                     }) : <p>Keine Einträge {props.persons.length}</p>}
             </IonList>

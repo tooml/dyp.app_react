@@ -6,6 +6,7 @@ import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageAc
 export const FETCH_PERSONS = 'FETCH_PERSONS'
 export const SELECT_PERSON = 'SELECT_PERSON'
 export const SAVE_PERSON = 'SAVE_PERSON'
+export const DELETE_PERSON = 'DELETE_PERSON'
 
 export interface FetchPersonsAction {
     type: typeof FETCH_PERSONS;
@@ -22,7 +23,12 @@ export interface SavePersonAction {
     payload: Person;
 }
 
-export type PersonActionTypes = FetchPersonsAction | SelectPersonAction | SavePersonAction;
+export interface DeletePersonAction {
+    type: typeof DELETE_PERSON;
+    payload: Person;
+}
+
+export type PersonActionTypes = FetchPersonsAction | SelectPersonAction | SavePersonAction | DeletePersonAction;
 
 export const fetchPersons = () => {
     return async (dispatch: Dispatch) => {
@@ -58,6 +64,22 @@ export const savePerson = (person: Person) => {
         api.savePersons(person).then(result => {
             dispatch<SavePersonAction>({
                 type: SAVE_PERSON,
+                payload: person
+            });
+        }).then(() => {
+            dispatch<ShowMessageAction>({
+                type: SHOW_MESSAGE,
+                payload: createToastMessage('save', 'success')
+            });
+        })
+    };
+};
+
+export const deletePerson = (person: Person) => {
+    return async (dispatch: Dispatch) => {
+        api.deltePerson(person.id).then(result => {
+            dispatch<DeletePersonAction>({
+                type: DELETE_PERSON,
                 payload: person
             });
         }).then(() => {
