@@ -31,7 +31,7 @@ const Tournaments: React.FC<RouteComponentProps> = (props) => {
 
     return (
         <IonPage>
-            <Header title='Turnier laden' backButtonUrl='' />
+            <Header title='Load tournament' backButtonUrl='' />
 
             <IonContent>
                 <TournamentsList tournaments={tournaments}

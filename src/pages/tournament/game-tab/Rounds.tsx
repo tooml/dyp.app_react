@@ -28,7 +28,6 @@ const Rounds: React.FC = () => {
         <IonPage>
             <Header title={tournament.name} backButtonUrl='' />
             <IonContent>
-                {/* {JSON.stringify(tournament)}  */}
                 <IonList>
                     {rounds.length ?
                         rounds.map((round: Round) => {

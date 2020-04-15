@@ -37,7 +37,7 @@ const PersonEdit: React.FC = () => {
 
     return (
         <IonPage>
-            <Header title='Edit' backButtonUrl='/persons' />
+            <Header title='Edit person' backButtonUrl='/persons' />
 
             <IonContent>
                 <form onSubmit={onSubmit}>

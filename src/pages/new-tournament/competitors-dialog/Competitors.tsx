@@ -35,7 +35,7 @@ const Competitors: React.FC<RouteComponentProps> = (props) => {
 
     return (
         <IonPage>
-            <Header title='Teilnehmer' backButtonUrl='/new/options' />
+            <Header title='Competitors' backButtonUrl='/new/options' />
             <IonContent>
                 <CompetitorsList competitors={competitors} onCompeteChange={_toggleCompetitor} />
                 <AcceptButton disabled={competitors.filter(c => c.compete).length < 4} onClick={createTournament} />

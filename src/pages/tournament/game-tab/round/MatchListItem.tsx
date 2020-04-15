@@ -18,7 +18,7 @@ const MatchListItem: React.FC<MatchListItemProps> = (props) => {
     return (
         <IonItem routerLink={'/edit'} routerDirection="forward" button={true} onClick={() => props.selectMatch(props.match)}>
             <div id="match-container">
-                <div id="table-label">Match auf Table {props.match.table}</div>
+                <div id="table-label">Match on table {props.match.table}</div>
 
                 <div id="home-team">
                     <TeamItem team={props.match.home} home={true} shortName={true} />

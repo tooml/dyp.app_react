@@ -34,13 +34,13 @@ const NameEdit: React.FC<NameEditProps> = (props) => {
                         <IonCol size="10">
                             <IonCard>
                                 <IonCardHeader>
-                                    <IonCardSubtitle>You need a name for your Tournament</IonCardSubtitle>
+                                    <IonCardSubtitle>You need a name for your Tournament.</IonCardSubtitle>
                                 </IonCardHeader>
 
                                 <IonCardContent>
                                     <IonItem>
                                         <IonInput name="tournamentName"
-                                            placeholder="Enter Name"
+                                            placeholder="Enter tournament name"
                                             type="text"
                                             value={tournamentName}
                                             onInput={event => setTournamentName((event.target as HTMLInputElement).value)}

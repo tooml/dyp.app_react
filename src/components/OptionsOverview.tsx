@@ -30,13 +30,12 @@ const OptionsOverview: React.FC<OptionsOverviewProps> = (props) => {
 
     return (
         <IonContent>
-            {/* <p>{JSON.stringify(tableOptions)}</p> */}
             <IonItemGroup>
                 <IonItemDivider>
-                    <IonLabel>Tische</IonLabel>
+                    <IonLabel>Tables</IonLabel>
                 </IonItemDivider>
 
-                <Selection label={'Tables'}
+                <Selection label={'Number of tables'}
                     options={tableOptions}
                     selected={String(props.options.tables)}
                     disabled={false}
@@ -45,16 +44,16 @@ const OptionsOverview: React.FC<OptionsOverviewProps> = (props) => {
 
             <IonItemGroup>
                 <IonItemDivider>
-                    <IonLabel>Punkte</IonLabel>
+                    <IonLabel>Points</IonLabel>
                 </IonItemDivider>
 
-                <Selection label={'Points'}
+                <Selection label={'Points per win'}
                     options={pointOptions}
                     selected={String(props.options.points)}
                     disabled={false}
                     onChanged={value => props.changePoints(value)} />
 
-                <Selection label={'Points Drawn'}
+                <Selection label={'Points per drawn'}
                     options={pointOptions}
                     selected={String(props.options.pointsDrawn)}
                     disabled={!props.options.drawn}
@@ -67,10 +66,10 @@ const OptionsOverview: React.FC<OptionsOverviewProps> = (props) => {
 
             <IonItemGroup>
                 <IonItemDivider>
-                    <IonLabel>Gewinnsätze</IonLabel>
+                    <IonLabel>Winning sets</IonLabel>
                 </IonItemDivider>
 
-                <Selection label={'Gewinnsätze'}
+                <Selection label={'Winning sets'}
                     options={setOptions}
                     selected={String(props.options.sets)}
                     disabled={false}
@@ -79,10 +78,10 @@ const OptionsOverview: React.FC<OptionsOverviewProps> = (props) => {
 
             <IonItemGroup>
                 <IonItemDivider>
-                    <IonLabel>Freilos</IonLabel>
+                    <IonLabel>Fair draw</IonLabel>
                 </IonItemDivider>
 
-                <Toggle label={'Freiloswertung'}
+                <Toggle label={'Fair draw'}
                     checked={props.options.walkover}
                     onChanged={value => props.setWalkover(value)} />
             </IonItemGroup>

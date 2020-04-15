@@ -67,9 +67,7 @@ const MatchResult: React.FC = () => {
 
     return (
         <IonPage>
-             {/* <p>{JSON.stringify(match.sets)}</p> 
-             <p>{JSON.stringify(results)}</p> */}
-            <Header title='Ergebnis bearbeiten' backButtonUrl='/game' />
+            <Header title='Edit match' backButtonUrl='/game' />
 
             <IonCard>
                 <IonCardHeader color="secondary">
