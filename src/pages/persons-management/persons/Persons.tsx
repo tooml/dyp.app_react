@@ -3,17 +3,18 @@ import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPersons, selectPerson, newPerson, deletePerson } from '../../../state/actions/PersonActions';
-import Person from '../../../contracts/data/Person';
+import { Person } from '../../../contracts/data/Person';
 import { StoreState } from '../../../state/store/Store';
 
 import { IonContent, IonPage } from '@ionic/react';
 
 import Header from '../../../components/Header';
+import Loading from '../../../components/Loading';
 import PersonsList from './PersonsList';
 import AddButton from '../../../components/buttons/AddButton';
 
 const Persons: React.FC<RouteComponentProps> = (props) => {
-
+// https://ionicframework.com/docs/react/your-first-app/2-taking-photos
     const dispatch = useDispatch();
     const persons: Person[] = useSelector((state: StoreState) => state.personsState.persons);
 
@@ -38,6 +39,7 @@ const Persons: React.FC<RouteComponentProps> = (props) => {
         <IonPage>
             <Header title='Persons' backButtonUrl='' />
             <IonContent>
+                <Loading />
                 <PersonsList persons={persons}
                     selectPerson={onSelectPerson}
                     deletePerson={onDeltePerson} />

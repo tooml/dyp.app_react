@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import * as api from '../../api/Api'
 import { Competitor } from '../../contracts/data/Competitor';
 import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
+import { LoadingAction, LOADING } from './LoadingActions';
 
 export const FETCH_INITIAL_COMPETITORS = 'FETCH_INITIAL_COMPETITORS'
 export const TOGGLE_COMPETITOR = 'TOGGLE_COMPETITOR'
@@ -32,10 +33,19 @@ export type CompetitorsActionTypes = FetchIntitialCompetitorsAction | ToggleComp
 
 export const fetchInitialCompetitors = () => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.getCompetitors().then(initialCompetitors => {
             dispatch<FetchIntitialCompetitorsAction>({
                 type: FETCH_INITIAL_COMPETITORS,
                 payload: initialCompetitors
+            });
+        }).finally(() => {
+            dispatch<LoadingAction>({
+                type: LOADING,
+                payload: false
             });
         })
     };
@@ -52,6 +62,10 @@ export const toggleCompetitor = (competitor: Competitor) => {
 
 export const fetchTournamentCompetitors = (tournamentId: string) => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.getTournamentCompetitors(tournamentId).then(competitors => {
             dispatch<FetchTournamentCompetitorsAction>({
                 type: FETCH_TOURNAMENT_COMPETITORS,
@@ -62,12 +76,21 @@ export const fetchTournamentCompetitors = (tournamentId: string) => {
                 type: SHOW_MESSAGE,
                 payload: createToastMessage(error, 'warning', 3000)
             });
+        }).finally(() => {
+            dispatch<LoadingAction>({
+                type: LOADING,
+                payload: false
+            });
         });
     };
 };
 
 export const saveTournamentCompetitors = (tournamentId: string, competitorIds: string[]) => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.saveTournamentCompetitors(tournamentId, competitorIds).then(result => {
             dispatch<any>(fetchTournamentCompetitors(tournamentId));
             dispatch<ShowMessageAction>({
@@ -78,6 +101,11 @@ export const saveTournamentCompetitors = (tournamentId: string, competitorIds: s
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
                 payload: createToastMessage(error, 'warning', 3000)
+            });
+        }).finally(() => {
+            dispatch<LoadingAction>({
+                type: LOADING,
+                payload: false
             });
         });
     };

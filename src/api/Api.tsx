@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Person from '../contracts/data/Person';
+import { Person, PersonStats } from '../contracts/data/Person';
 import { Tournament, SetResult, Round, RankingRow } from '../contracts/data/Tournament';
 import TournamentInfo from '../contracts/data/TournamentInfo';
 import { Competitor } from '../contracts/data/Competitor';
@@ -7,6 +7,14 @@ import Options from '../contracts/data/Options';
 
 interface PersonStockQueryResult {
     persons: Person[];
+}
+
+interface PersonStatsQueryResult {
+    tournaments: number;
+    matches: number;
+    wins: number;
+    loose: number;
+    drawn: number;
 }
 
 interface PersonTemplateQueryResult {
@@ -105,6 +113,21 @@ let axiosConfig = {
 export const getPersons = async () => {
     return await axios.get<PersonStockQueryResult>('/person/all').then(response => {
         return response.data.persons;
+    })
+}
+
+export const getPersonStats = async (personId: string) => {
+    return await axios.get<PersonStatsQueryResult>('/person/stats', {
+        params: { personId: personId }
+    }).then(response => {
+        const stats: PersonStats = {
+            tournaments: response.data.tournaments,
+            matches: response.data.matches,
+            wins: response.data.wins,
+            loose: response.data.loose,
+            drawn: response.data.drawn,
+        };
+        return stats;
     })
 }
 

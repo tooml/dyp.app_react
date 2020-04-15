@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Person from '../../../contracts/data/Person';
+import { Person } from '../../../contracts/data/Person';
 import PersonListItem from './PersonListItem';
 
 import { IonContent, IonList } from '@ionic/react';

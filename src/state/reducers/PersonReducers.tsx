@@ -1,4 +1,4 @@
-import { PersonActionTypes, FETCH_PERSONS, SELECT_PERSON, SAVE_PERSON, DELETE_PERSON } from '../actions/PersonActions';
+import { PersonActionTypes, FETCH_PERSONS, SELECT_PERSON, SAVE_PERSON, DELETE_PERSON, FETCH_PERSON_STATS } from '../actions/PersonActions';
 import { initialState, PersonsState } from './../store/PersonStore';
 import produce from 'immer';
 
@@ -10,6 +10,9 @@ export function personsReducer(personsState: PersonsState = initialState, action
 
     case SELECT_PERSON:
       return { ...personsState, person: action.payload }
+
+    case FETCH_PERSON_STATS:
+      return { ...personsState, personStats: action.payload }
 
     case SAVE_PERSON:
       const save_index = personsState.persons.findIndex(p => p.id === action.payload.id);

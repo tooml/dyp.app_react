@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import Person from '../../../contracts/data/Person';
+import { Person, PersonStats} from '../../../contracts/data/Person';
 import { savePerson } from '../../../state/actions/PersonActions';
 import { StoreState } from '../../../state/store/Store';
 
@@ -19,6 +19,7 @@ const PersonEdit: React.FC = () => {
 
     const dispatch = useDispatch();
     const person: Person = useSelector((state: StoreState) => state.personsState.person);
+    const personStats: PersonStats = useSelector((state: StoreState) => state.personsState.personStats);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
 
@@ -36,7 +37,7 @@ const PersonEdit: React.FC = () => {
 
     return (
         <IonPage>
-            <Header title='Bearbeiten' backButtonUrl='/persons' />
+            <Header title='Edit' backButtonUrl='/persons' />
 
             <IonContent>
                 <form onSubmit={onSubmit}>
@@ -47,86 +48,100 @@ const PersonEdit: React.FC = () => {
 
                         <IonGrid>
                             <IonRow>
-                                <IonCol size="5">
+                                <IonCol size="6">
                                     <IonItem lines="none">
-                                        <IonLabel>Vorname:</IonLabel>
+                                        <IonLabel>First name:</IonLabel>
                                     </IonItem>
                                 </IonCol>
-                                <IonCol size="7">
+                                <IonCol size="6">
                                     <IonItem>
                                         <IonInput value={firstName} onInput={e => setFirstName((e.target as HTMLInputElement).value)}
                                             name="firstName" type="text" placeholder="Vorname"
-                                            maxlength={20} minlength={3} required={true} />
+                                            maxlength={15} minlength={3} required={true} />
                                     </IonItem>
                                 </IonCol>
                             </IonRow>
 
                             <IonRow>
-                                <IonCol size="5">
+                                <IonCol size="6">
                                     <IonItem lines="none">
-                                        <IonLabel>Nachname:</IonLabel>
+                                        <IonLabel>Last name:</IonLabel>
                                     </IonItem>
                                 </IonCol>
-                                <IonCol size="7">
+                                <IonCol size="6">
                                     <IonItem>
                                         <IonInput value={lastName} onInput={e => setLastName((e.target as HTMLInputElement).value)}
                                             name="lastName" type="text" placeholder="Nachname"
-                                            maxlength={20} minlength={3} />
+                                            maxlength={10} minlength={3} />
                                     </IonItem>
                                 </IonCol>
                             </IonRow>
 
                             <IonRow>
-                                <IonCol size="5">
+                                <IonCol size="6">
                                     <IonItem lines="none">
-                                        <IonLabel>Teilnahmen:</IonLabel>
+                                        <IonLabel>Tournaments:</IonLabel>
                                     </IonItem>
                                 </IonCol>
-                                <IonCol size="7">
+                                <IonCol size="6">
                                     <IonItem>
-                                        <IonLabel>Teilnahmen</IonLabel>
+                                        <IonLabel>{personStats.tournaments}</IonLabel>
                                     </IonItem>
                                 </IonCol>
                             </IonRow>
 
                             <IonRow>
-                                <IonCol size="5">
+                                <IonCol size="6">
                                     <IonItem lines="none">
-                                        <IonLabel>Spiele:</IonLabel>
+                                        <IonLabel>Played matches:</IonLabel>
                                     </IonItem>
                                 </IonCol>
-                                <IonCol size="7">
+                                <IonCol size="6">
                                     <IonItem>
-                                        <IonLabel>Spiele</IonLabel>
+                                        <IonLabel>{personStats.matches}</IonLabel>
                                     </IonItem>
                                 </IonCol>
                             </IonRow>
 
                             <IonRow>
-                                <IonCol size="5">
+                                <IonCol size="6">
                                     <IonItem lines="none">
-                                        <IonLabel>Verloren:</IonLabel>
+                                        <IonLabel>Wins:</IonLabel>
                                     </IonItem>
                                 </IonCol>
-                                <IonCol size="7">
+                                <IonCol size="6">
                                     <IonItem>
-                                        <IonLabel>Verloren</IonLabel>
+                                        <IonLabel>{personStats.wins}</IonLabel>
                                     </IonItem>
                                 </IonCol>
                             </IonRow>
 
                             <IonRow>
-                                <IonCol size="5">
+                                <IonCol size="6">
                                     <IonItem lines="none">
-                                        <IonLabel>Gewonnen:</IonLabel>
+                                        <IonLabel>Drawn:</IonLabel>
                                     </IonItem>
                                 </IonCol>
-                                <IonCol size="7">
+                                <IonCol size="6">
                                     <IonItem>
-                                        <IonLabel>Gewonnen</IonLabel>
+                                        <IonLabel>{personStats.drawn}</IonLabel>
                                     </IonItem>
                                 </IonCol>
                             </IonRow>
+
+                            <IonRow>
+                                <IonCol size="6">
+                                    <IonItem lines="none">
+                                        <IonLabel>Loose:</IonLabel>
+                                    </IonItem>
+                                </IonCol>
+                                <IonCol size="6">
+                                    <IonItem>
+                                        <IonLabel>{personStats.loose}</IonLabel>
+                                    </IonItem>
+                                </IonCol>
+                            </IonRow>
+
                         </IonGrid>
                     </IonCard>
                     <SubmitButton />

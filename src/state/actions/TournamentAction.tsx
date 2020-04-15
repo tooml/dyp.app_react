@@ -4,6 +4,7 @@ import TournamentInfo from '../../contracts/data/TournamentInfo';
 import { Tournament, Round, Match, RankingRow } from '../../contracts/data/Tournament';
 import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
 import Options from '../../contracts/data/Options';
+import { LoadingAction, LOADING } from './LoadingActions';
 
 export const FETCH_TOURNAMENTS = 'FETCH_TOURNAMENTS'
 export const DELETE_TOURNAMENT = 'DELETE_TOURNAMENT'
@@ -97,6 +98,10 @@ export type TournamentsActionTypes = FetchTournamentsAction | DeleteTournamentAc
 
 export const createNewTournament = (options: Options, ids: string[]) => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.createTournament(options, ids)
             .then(result => {
                 dispatch<any>(fetchTournaments())
@@ -104,6 +109,11 @@ export const createNewTournament = (options: Options, ids: string[]) => {
                 dispatch<ShowMessageAction>({
                     type: SHOW_MESSAGE,
                     payload: createToastMessage(error, 'warning', 3000)
+                });
+            }).finally(() => {
+                dispatch<LoadingAction>({
+                    type: LOADING,
+                    payload: false
                 });
             });
     };
@@ -131,6 +141,10 @@ export const deleteTournament = (tournament: TournamentInfo) => {
 
 export const fetchTournaments = () => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.getTournaments().then(tournaments => {
             dispatch<FetchTournamentsAction>({
                 type: FETCH_TOURNAMENTS,
@@ -141,12 +155,21 @@ export const fetchTournaments = () => {
                 type: SHOW_MESSAGE,
                 payload: createToastMessage(error, 'warning', 3000)
             });
+        }).finally(() => {
+            dispatch<LoadingAction>({
+                type: LOADING,
+                payload: false
+            });
         });
     };
 };
 
 export const loadTournament = (tournamentId: string) => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.loadTournament(tournamentId).then(tournament => {
             dispatch<LoadTournamenAction>({
                 type: LOAD_TOURNAMENT,
@@ -157,12 +180,21 @@ export const loadTournament = (tournamentId: string) => {
                 type: SHOW_MESSAGE,
                 payload: createToastMessage(error, 'warning', 3000)
             });
+        }).finally(() => {
+            dispatch<LoadingAction>({
+                type: LOADING,
+                payload: false
+            });
         });
     };
 };
 
 export const newRound = (tournamentId: string) => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.createRound(tournamentId).then(result => {
             api.loadLastTournamentRound(tournamentId).then(round => {
                 dispatch<NewRoundAction>({
@@ -173,6 +205,11 @@ export const newRound = (tournamentId: string) => {
                 dispatch<ShowMessageAction>({
                     type: SHOW_MESSAGE,
                     payload: createToastMessage(error, 'warning', 3000)
+                });
+            }).finally(() => {
+                dispatch<LoadingAction>({
+                    type: LOADING,
+                    payload: false
                 });
             });
         });
@@ -232,6 +269,10 @@ export const resetMatchResult = (match: Match, tournamentId: string) => {
 
 export const fetchTournamentRanking = (tournamentId: string) => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.getTournamentRanking(tournamentId).then(ranking => {
             dispatch<FetchTournamentRankingAction>({
                 type: FETCH_TOURNAMENT_RANKING,
@@ -241,6 +282,11 @@ export const fetchTournamentRanking = (tournamentId: string) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
                 payload: createToastMessage(error, 'warning', 3000)
+            });
+        }).finally(() => {
+            dispatch<LoadingAction>({
+                type: LOADING,
+                payload: false
             });
         });
     };
@@ -311,7 +357,7 @@ export const changeTournamentOptions = (tournamentId: string, options: Options) 
         }).catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+                payload: createToastMessage(error, 'warning', 10000)
             });
         });
     }
