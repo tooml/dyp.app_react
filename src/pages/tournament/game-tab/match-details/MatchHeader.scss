@@ -3,6 +3,8 @@
     grid-template-columns: 10fr 2fr;
     grid-auto-rows: auto;
     gap: 3px;
+    border-radius: 5px;
+    background-color: var(--ion-color-step-50);
     place-items: center;
     justify-items: center stretch;
     grid-template-areas: 'home-team home-result' 'text empty' 'away-team away-result'
@@ -11,6 +13,7 @@
 #match-header-container div {
     display: inline-grid;
     font-size: large;
+    border-radius: 5px;
 }
 
 #home-team {

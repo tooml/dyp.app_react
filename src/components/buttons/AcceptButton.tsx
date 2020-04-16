@@ -13,7 +13,7 @@ const AcceptButton: React.FC<AcceptButtonProps> = (props) => {
     return (
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
             <IonButton className="ion-button" type="button" color="primary" size="small" disabled={props.disabled} onClick={event => props.onClick()}>
-                <IonIcon icon={checkmarkOutline} />
+                <IonIcon icon={checkmarkOutline} size="small" />
             </IonButton>
         </IonFab>
     );

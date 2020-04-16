@@ -8,7 +8,7 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
-import { football, list, settings, body } from 'ionicons/icons';
+import { football, list, settings, people } from 'ionicons/icons';
 
 import Rounds from './game-tab/Rounds';
 import Ranking from './ranking-tab/Ranking';
@@ -34,22 +34,22 @@ const TournamentTabs: React.FC = () => {
 
                         <IonTabBar slot="bottom">
                             <IonTabButton tab="game" href="/game">
-                                <IonIcon icon={'football'} />
+                                <IonIcon icon={football} />
                                 <IonLabel>Game</IonLabel>
                             </IonTabButton>
 
                             <IonTabButton tab="ranking" href="/ranking">
-                                <IonIcon icon={'list'} />
+                                <IonIcon icon={list} />
                                 <IonLabel>Ranking</IonLabel>
                             </IonTabButton>
 
                             <IonTabButton tab="options" href="/options">
-                                <IonIcon icon={'settings'} />
+                                <IonIcon icon={settings} />
                                 <IonLabel>Options</IonLabel>
                             </IonTabButton>
 
                             <IonTabButton tab="players" href="/players">
-                                <IonIcon icon={'body'} />
+                                <IonIcon icon={people} />
                                 <IonLabel>Players</IonLabel>
                             </IonTabButton>
                         </IonTabBar>

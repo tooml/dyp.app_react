@@ -36,7 +36,7 @@ import './style.scss';
 import './theme/variables.css';
 
 import ToatsMessage from './components/ToastMessenger';
-import { homeOutline, list } from 'ionicons/icons';
+import { home, people, play, construct, trophy } from 'ionicons/icons';
 import { useSelector } from 'react-redux';
 import { StoreState } from './state/store/Store';
 
@@ -49,31 +49,31 @@ const App: React.FC = () => {
     {
       title: 'Home',
       url: '/home',
-      icon: homeOutline,
+      icon: home,
       disabled: false
     },
     {
       title: 'Persons',
       url: '/persons',
-      icon: list,
+      icon: people,
       disabled: false
     },
     {
       title: 'New Tournament',
       url: '/new',
-      icon: list,
+      icon: construct,
       disabled: false
     },
     {
       title: 'Load Tournament',
       url: '/load',
-      icon: list,
+      icon: play,
       disabled: false
     },
     {
       title: 'Tournament',
       url: '/tournament',
-      icon: list,
+      icon: trophy,
       disabled: tournamentId.length === 0
     }
   ];

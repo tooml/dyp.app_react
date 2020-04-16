@@ -70,7 +70,7 @@ const MatchResult: React.FC = () => {
             <Header title='Edit match' backButtonUrl='/game' />
 
             <IonCard>
-                <IonCardHeader color="secondary">
+                <IonCardHeader>
                     <MatchHeader match={match} results={results} />
                 </IonCardHeader>
             </IonCard>

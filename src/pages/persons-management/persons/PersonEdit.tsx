@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { Person, PersonStats} from '../../../contracts/data/Person';
+import { Person, PersonStats } from '../../../contracts/data/Person';
 import { savePerson } from '../../../state/actions/PersonActions';
 import { StoreState } from '../../../state/store/Store';
 
 import {
     IonPage, IonContent, IonCard,
-    IonCardTitle, IonCardHeader, IonGrid,
+    IonCardHeader, IonGrid,
     IonRow, IonCol, IonItem,
-    IonLabel, IonInput
+    IonLabel, IonInput, IonAvatar, IonIcon
 } from '@ionic/react';
 
 import SubmitButton from '../../../components/buttons/SubmitButton';
 import Header from '../../../components/Header';
+import { person } from 'ionicons/icons';
 
 const PersonEdit: React.FC = () => {
 
@@ -43,7 +44,9 @@ const PersonEdit: React.FC = () => {
                 <form onSubmit={onSubmit}>
                     <IonCard>
                         <IonCardHeader>
-                            <IonCardTitle>Bearbeiten Bild</IonCardTitle>
+                            <IonAvatar>
+                                <IonIcon slot="start" size="large" icon="person" />
+                            </IonAvatar>
                         </IonCardHeader>
 
                         <IonGrid>

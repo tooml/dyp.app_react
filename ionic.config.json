@@ -1,7 +1,7 @@
 {
-  "name": "dyp.app",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react"
+    "name": "dyp",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "react"
 }

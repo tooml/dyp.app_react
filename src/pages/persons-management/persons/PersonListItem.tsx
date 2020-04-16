@@ -5,7 +5,7 @@ import { Person } from '../../../contracts/data/Person';
 import SlidingResetButton from '../../../components/buttons/SlidingResetButton';
 
 import { IonItem, IonLabel, IonIcon, IonItemSliding } from '@ionic/react';
-import { personOutline } from 'ionicons/icons';
+import { person } from 'ionicons/icons';
 
 interface PersonProps extends RouteComponentProps {
     person: Person,
@@ -18,7 +18,7 @@ const PersonListItem: React.FC<PersonProps> = (props) => {
         <IonItemSliding >
 
             <IonItem routerLink={'/edit/person'} button={true} onClick={() => props.selectPerson(props.person)}>
-                <IonIcon slot="start" size="large" color="medium" icon={personOutline} />
+                <IonIcon slot="start" size="large" icon={person} />
                 <IonLabel>
                     <h3>{props.person.firstName} , {props.person.lastName}</h3>
                 </IonLabel>
