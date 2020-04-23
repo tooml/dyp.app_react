@@ -2,7 +2,7 @@ import { OptionsState, initialState } from "../store/OptionsStore";
 import {
     OptionsActionTypes, FETCH_OPTIONS, SET_TOURNAMENT_NAME, SET_DRAWN_OPTION,
     SET_TABLES_OPTION, SET_POINTS_OPTION, SET_POINTS_DRAWN_OPTION, SET_SETS_OPTION,
-    SET_WALKOVER_OPTION
+    SET_FAIR_LOTS_OPTION
 } from "../actions/OptionsActions";
 import produce from "immer";
 
@@ -40,9 +40,9 @@ export function optionsReducer(optionsState: OptionsState = initialState, action
             return produce(optionsState, draft => {
                 draft.options.sets = action.payload;
             });
-        case SET_WALKOVER_OPTION:
+        case SET_FAIR_LOTS_OPTION:
             return produce(optionsState, draft => {
-                draft.options.walkover = action.payload;
+                draft.options.fairLots = action.payload;
             });
 
         default:

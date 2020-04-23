@@ -9,7 +9,8 @@ import './TeamItem.scss';
 interface TeamItemProps {
     team: Team,
     home: boolean,
-    shortName: boolean
+    shortName: boolean,
+    size: string
 }
 
 const TeamItem: React.FC<TeamItemProps> = (props) => {
@@ -17,14 +18,34 @@ const TeamItem: React.FC<TeamItemProps> = (props) => {
     if (isHome) {
         return (
             <div id="team-container">
-                <div id="player-one"><HomePlayerItem player={props.team.playerOne} shortName={props.shortName} /></div>
-                <div id="player-two"><HomePlayerItem player={props.team.playerTwo} shortName={props.shortName}/></div>
+                <div id="player-one">
+                    <HomePlayerItem
+                        player={props.team.playerOne}
+                        shortName={props.shortName}
+                        size={props.size} />
+                </div>
+                <div id="player-two">
+                    <HomePlayerItem
+                        player={props.team.playerTwo}
+                        shortName={props.shortName}
+                        size={props.size} />
+                </div>
             </div>);
     }
     return (
         <div id="team-container">
-            <div id="player-one"><AwayPlayerItem player={props.team.playerOne} shortName={props.shortName}/></div>
-            <div id="player-two"><AwayPlayerItem player={props.team.playerTwo} shortName={props.shortName}/></div>
+            <div id="player-one">
+                <AwayPlayerItem
+                    player={props.team.playerOne}
+                    shortName={props.shortName}
+                    size={props.size} />
+            </div>
+            <div id="player-two">
+                <AwayPlayerItem
+                    player={props.team.playerTwo}
+                    shortName={props.shortName}
+                    size={props.size} />
+            </div>
         </div>
     );
 };

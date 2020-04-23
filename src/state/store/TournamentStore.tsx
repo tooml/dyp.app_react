@@ -16,12 +16,12 @@ export const initialState: TournamentState = {
   match: {
     id: '', sets: 0, drawn: false,
     home: {
-      playerOne: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'' },
-      playerTwo: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'' }
+      playerOne: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'', image: '' },
+      playerTwo: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'', image: '' }
     },
     away: {
-      playerOne: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'' },
-      playerTwo: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'' }
+      playerOne: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'', image: '' },
+      playerTwo: { id: '', firstName: '', lastName: '', fullName: '', fullNameShort:'', image: '' }
     },
     table: 0,
     setResults: [],

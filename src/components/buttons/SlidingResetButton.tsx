@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { IonIcon, IonItemOptions, IonItemOption } from '@ionic/react';
-import { trashOutline } from 'ionicons/icons';
+import { trash } from 'ionicons/icons';
 
 export interface ResetButtonProps {
     onClick: () => void,
@@ -12,7 +12,7 @@ const SlidingResetButton: React.FC<ResetButtonProps> = (props) => {
     return (
         <IonItemOptions side="end">
             <IonItemOption color="danger" onClick={() => props.onClick()}>
-                <IonIcon slot="icon-only" icon={trashOutline} />
+                <IonIcon slot="icon-only" icon={trash} />
             </IonItemOption>
         </IonItemOptions>
     );

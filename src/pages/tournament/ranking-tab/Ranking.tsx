@@ -3,8 +3,10 @@ import React, { useEffect } from 'react';
 import {
     IonContent,
     IonPage,
-    IonGrid
+    IonGrid,
+    IonRefresher
 } from '@ionic/react';
+import { RefresherEventDetail } from '@ionic/core';
 
 import { StoreState } from '../../../state/store/Store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,17 +30,23 @@ const Ranking: React.FC = () => {
         dispatch(fetchTournamentRanking(tournamentId));
     }, [dispatch, tournamentId]);
 
+    const reload = (event: CustomEvent<RefresherEventDetail>) => {
+        dispatch(fetchTournamentRanking(tournamentId));
+        event.detail.complete();
+    }
+
     return (
         <IonPage>
             <Header title={tournamentName} backButtonUrl='' />
             <IonContent>
-               <IonGrid className="grid">
+                <IonRefresher slot="fixed" onIonRefresh={reload} />
+                <IonGrid className="grid">
                     <RankingRowHeaderItem />
-                        {ranking.length ?
-                            ranking.map((row: RankingRow, index: number) => {
-                                return <RankingRowItem key={index} row={row} />
-                            }) : <p>Keine Einträge {ranking.length}</p>}
-                   </IonGrid>
+                    {ranking.length ?
+                        ranking.map((row: RankingRow, index: number) => {
+                            return <RankingRowItem key={index} row={row} />
+                        }) : <p>Keine Einträge {ranking.length}</p>}
+                </IonGrid>
             </IonContent>
         </IonPage>
     );

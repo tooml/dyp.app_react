@@ -5,5 +5,5 @@ export default interface Options {
     pointsDrawn: number,
     drawn: boolean,
     sets: number,
-    walkover: boolean
+    fairLots: boolean
 }

@@ -4,8 +4,8 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Person } from '../../../contracts/data/Person';
 import SlidingResetButton from '../../../components/buttons/SlidingResetButton';
 
-import { IonItem, IonLabel, IonIcon, IonItemSliding } from '@ionic/react';
-import { person } from 'ionicons/icons';
+import { IonItem, IonLabel, IonItemSliding } from '@ionic/react';
+import Avatar from '../../../components/Avatar';
 
 interface PersonProps extends RouteComponentProps {
     person: Person,
@@ -17,8 +17,8 @@ const PersonListItem: React.FC<PersonProps> = (props) => {
     return (
         <IonItemSliding >
 
-            <IonItem routerLink={'/edit/person'} button={true} onClick={() => props.selectPerson(props.person)}>
-                <IonIcon slot="start" size="large" icon={person} />
+            <IonItem detail={false} routerLink={'/edit/person'} button={true} onClick={() => props.selectPerson(props.person)}>
+                <Avatar avatarSrc={props.person.image} size='medium' />
                 <IonLabel>
                     <h3>{props.person.firstName} , {props.person.lastName}</h3>
                 </IonLabel>

@@ -23,6 +23,7 @@
 #home-team {
     padding: 1px;
     grid-area: home-team;
+    justify-self: right;
 }
 
 #result-btn {
@@ -30,9 +31,11 @@
     align-self: center;
     justify-self: center;
     font-size: larger;
+    color: var(--ion-color-primary);
 }
 
 #away-team {
     padding: 1px;
     grid-area: away-team;
+    justify-self: left;
 }

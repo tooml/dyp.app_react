@@ -6,7 +6,8 @@ import { fetchPersons, selectPerson, newPerson, deletePerson } from '../../../st
 import { Person } from '../../../contracts/data/Person';
 import { StoreState } from '../../../state/store/Store';
 
-import { IonContent, IonPage } from '@ionic/react';
+import { IonContent, IonPage, IonRefresher } from '@ionic/react';
+import { RefresherEventDetail } from '@ionic/core';
 
 import Header from '../../../components/Header';
 import Loading from '../../../components/Loading';
@@ -31,6 +32,11 @@ const Persons: React.FC<RouteComponentProps> = (props) => {
         dispatch(deletePerson(person));
     }
 
+    const reload = (event: CustomEvent<RefresherEventDetail>) =>{
+        dispatch(fetchPersons());
+        event.detail.complete();
+    }
+    
     useEffect(() => {
         dispatch(fetchPersons());
     }, [persons.length, dispatch]);
@@ -40,6 +46,7 @@ const Persons: React.FC<RouteComponentProps> = (props) => {
             <Header title='Persons' backButtonUrl='' />
             <IonContent>
                 <Loading />
+                <IonRefresher slot="fixed" onIonRefresh={reload} />
                 <PersonsList persons={persons}
                     selectPerson={onSelectPerson}
                     deletePerson={onDeltePerson} />

@@ -21,12 +21,14 @@ interface PersonTemplateQueryResult {
     id: string;
     firstName: string;
     lastName: string;
+    image: string;
 }
 
 interface StorePersonCommand {
     id: string;
     firstName: string;
     lastName: string;
+    image: string;
 }
 
 interface DeletePersonCommand {
@@ -44,7 +46,7 @@ interface CreateTournamentCommand {
     pointsDrawn: number,
     drawn: boolean,
     sets: number,
-    walkover: boolean,
+    fairLots: boolean,
     competitorsIds: string[]
 }
 
@@ -97,11 +99,18 @@ interface ChangeOptionsCommand {
     points: number;
     pointsDrawn: number;
     drawn: boolean;
-    walkover: boolean;
+    fairLots: boolean;
 }
 
 
-axios.defaults.baseURL = 'http://localhost/api/v1/';
+axios.defaults.baseURL = 'http://localhost:5000/api/v1/';
+//axios.defaults.baseURL = 'http://192.168.4.1:8888/api/v1/';
+//axios.defaults.baseURL = 'http://192.168.178.26:8080/api/v1/';
+//ionic build
+//npx cap copy
+//npx cap sync
+//npx cap open android
+
 
 let axiosConfig = {
     headers: {
@@ -113,7 +122,7 @@ let axiosConfig = {
 export const getPersons = async () => {
     return await axios.get<PersonStockQueryResult>('/person/all').then(response => {
         return response.data.persons;
-    })
+    });
 }
 
 export const getPersonStats = async (personId: string) => {
@@ -137,14 +146,22 @@ export const getPersonTemplate = async () => {
         const newPerson: Person = {
             id: personTemplate.id,
             firstName: personTemplate.firstName,
-            lastName: personTemplate.lastName
+            lastName: personTemplate.lastName,
+            image: personTemplate.image
         };
         return newPerson;
     });
 }
 
 export const savePersons = async (person: Person) => {
-    const command: StorePersonCommand = { id: person.id, firstName: person.firstName, lastName: person.lastName };
+    const command: StorePersonCommand = { 
+        id: person.id, 
+        firstName: 
+        person.firstName, 
+        lastName: person.lastName,
+        image: person.image 
+    };
+
     return await axios.post('/person', command, axiosConfig).then(response => {
         return response;
     });
@@ -171,7 +188,7 @@ export const createTournament = async (opitions: Options, competitors: string[])
         pointsDrawn: opitions.pointsDrawn,
         drawn: opitions.drawn,
         sets: opitions.sets,
-        walkover: opitions.walkover,
+        fairLots: opitions.fairLots,
         competitorsIds: competitors
     };
     return await axios.post('/tournament', command, axiosConfig).then(response => {
@@ -269,7 +286,7 @@ export const saveTournamentOptions = async (tournamentId: string, options: Optio
         points: options.points,
         pointsDrawn: options.pointsDrawn,
         drawn: options.drawn,
-        walkover: options.walkover,
+        fairLots: options.fairLots,
     };
     return await axios.post('/tournament/options/change', command, axiosConfig).then(response => {
         return response;

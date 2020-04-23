@@ -16,12 +16,12 @@ const MatchListItem: React.FC<MatchListItemProps> = (props) => {
     const { home, away } = useMatchResult(props.match.setResults);
     
     return (
-        <IonItem routerLink={'/edit'} routerDirection="forward" button={true} onClick={() => props.selectMatch(props.match)}>
+        <IonItem detail={false} routerLink={'/edit'} routerDirection="forward" button={true} onClick={() => props.selectMatch(props.match)}>
             <div id="match-container">
                 <div id="table-label">Match on table {props.match.table}</div>
 
                 <div id="home-team">
-                    <TeamItem team={props.match.home} home={true} shortName={true} />
+                    <TeamItem team={props.match.home} home={true} shortName={true} size='small'/>
                 </div>
 
                 <div id="result-btn">
@@ -29,7 +29,7 @@ const MatchListItem: React.FC<MatchListItemProps> = (props) => {
                 </div>
 
                 <div id="away-team">
-                    <TeamItem team={props.match.away} home={false} shortName={true} />
+                    <TeamItem team={props.match.away} home={false} shortName={true} size='small' />
                 </div>
             </div>
         </IonItem>

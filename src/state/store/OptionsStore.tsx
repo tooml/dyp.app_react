@@ -11,7 +11,7 @@ export const initialOptions: Options = {
     pointsDrawn: 1,
     drawn: false,
     sets: 2,
-    walkover: true
+    fairLots: false
 } 
 
 export const initialState: OptionsState = {

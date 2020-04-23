@@ -3,7 +3,7 @@ import {
   SAVE_MATCH_RESULT, NEW_ROUND, RESET_MATCH_RESULT,
   SaveMatchResultAction, ResetMatchResultAction, FETCH_TOURNAMENT_RANKING,
   SET_TOURNAMENT_TABLES_OPTION, SET_TOURNAMENT_POINTS_OPTION, SET_TOURNAMENT_POINTS_DRAWN_OPTION,
-  SET_TOURNAMENT_DRAWN_OPTION, SET_TOURNAMENT_SETS_OPTION, SET_TOURNAMENT_WALKOVER_OPTION, DELETE_TOURNAMENT
+  SET_TOURNAMENT_DRAWN_OPTION, SET_TOURNAMENT_SETS_OPTION, SET_TOURNAMENT_FAIR_LOTS_OPTION, DELETE_TOURNAMENT
 } from '../actions/TournamentAction';
 
 import { initialState, TournamentState } from './../store/TournamentStore';
@@ -66,9 +66,9 @@ export function tournamentReducer(tournamentsState: TournamentState = initialSta
         draft.tournament.options.sets = action.payload;
       });
 
-    case SET_TOURNAMENT_WALKOVER_OPTION:
+    case SET_TOURNAMENT_FAIR_LOTS_OPTION:
       return produce(tournamentsState, draft => {
-        draft.tournament.options.walkover = action.payload;
+        draft.tournament.options.fairLots = action.payload;
       });
 
     default:

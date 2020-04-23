@@ -2,7 +2,8 @@
 export interface Person {
   id: string,
   firstName: string,
-  lastName: string
+  lastName: string,
+  image: string,
 }
 
 export interface PersonStats {

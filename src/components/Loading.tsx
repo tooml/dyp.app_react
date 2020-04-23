@@ -11,7 +11,7 @@ const Loading: React.FC = () => {
     return (
         <IonLoading
             isOpen={loading}
-            message={'Daten werden geladen...'}
+            message={'Loading...'}
             spinner="bubbles"
             showBackdrop={true}
         />

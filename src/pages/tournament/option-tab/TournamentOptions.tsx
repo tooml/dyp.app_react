@@ -13,7 +13,7 @@ import OptionsOverview from '../../../components/OptionsOverview';
 import AcceptButton from '../../../components/buttons/AcceptButton';
 import { setTournamentTablesOption, setTournamentPointsOption, 
         setTournamentPointsDrawnOption, setTournamentDrawnOption, 
-        setTournamentSetsOption, setTournamentWalkoverOption, 
+        setTournamentSetsOption, setTournamentFairLotsOption, 
         changeTournamentOptions } from '../../../state/actions/TournamentAction';
 
 
@@ -34,7 +34,7 @@ const TournamentOptions: React.FC = () => {
                 changePointsDrawn={(value: number) => dispatch(setTournamentPointsDrawnOption(value))}
                 changeDrawn={(value: boolean) => dispatch(setTournamentDrawnOption(value))}
                 changeSets={(value: number) => dispatch(setTournamentSetsOption(value))}
-                setWalkover={(value: boolean) => dispatch(setTournamentWalkoverOption(value))}
+                changeFairLots={(value: boolean) => dispatch(setTournamentFairLotsOption(value))}
             />
             <AcceptButton disabled={tournamentId.length === 0} onClick={() => dispatch(changeTournamentOptions(tournamentId, tournamentOptions))} />
         </IonPage>

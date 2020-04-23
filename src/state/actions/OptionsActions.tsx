@@ -7,7 +7,7 @@ export const SET_POINTS_OPTION = 'SET_POINTS_OPTION'
 export const SET_POINTS_DRAWN_OPTION = 'SET_POINTS_DRAWN_OPTION'
 export const SET_DRAWN_OPTION = 'SET_DRAWN_OPTION'
 export const SET_SETS_OPTION = 'SET_SETS_OPTION'
-export const SET_WALKOVER_OPTION = 'SET_WALKOVER_OPTION'
+export const SET_FAIR_LOTS_OPTION = 'SET_FAIR_LOTS_OPTION'
 
 export interface FetchOptionsAction {
     type: typeof FETCH_OPTIONS;
@@ -43,14 +43,14 @@ export interface SetSetsOptionAction {
     payload: number;
 }
 
-export interface SetWalkoverOptionAction {
-    type: typeof SET_WALKOVER_OPTION;
+export interface SetFairLotsOptionAction {
+    type: typeof SET_FAIR_LOTS_OPTION;
     payload: boolean;
 }
 
 export type OptionsActionTypes = FetchOptionsAction | SetTournamentNameAction | SetDrawnOptionAction |
     SetTablesOptionAction | SetPointsOptionAction | SetPointsDrawnOptionAction | SetSetsOptionAction |
-    SetWalkoverOptionAction
+    SetFairLotsOptionAction
 
 export const fetchInitialOptions = () => {
     return async (dispatch: Dispatch) => {
@@ -114,11 +114,11 @@ export const setSetsOption = (sets: number) => {
     };
 };
 
-export const setWalkoverOption = (walkover: boolean) => {
+export const setFairLotsOption = (fairLots: boolean) => {
     return async (dispatch: Dispatch) => {
-        dispatch<SetWalkoverOptionAction>({
-            type: SET_WALKOVER_OPTION,
-            payload: walkover
+        dispatch<SetFairLotsOptionAction>({
+            type: SET_FAIR_LOTS_OPTION,
+            payload: fairLots
         });
     };
 };

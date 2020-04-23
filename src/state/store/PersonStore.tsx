@@ -8,6 +8,6 @@ export interface PersonsState {
 
 export const initialState: PersonsState = {
   persons: [],
-  person: { id: '', firstName: '', lastName: '' },
+  person: { id: '', firstName: '', lastName: '', image: '' },
   personStats: { tournaments: 0, matches: 0, wins: 0, loose: 0, drawn: 0}
 }

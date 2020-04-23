@@ -1,0 +1,21 @@
+.person-avatar {
+    padding: 8px;
+    &-small {
+        @extend .person-avatar;
+        padding: 5px;
+        width: 35px;
+        height: 35px;
+    }
+    &-medium {
+        @extend .person-avatar;
+        width: 47px;
+        height: 47px;
+    }
+    &-big {
+        @extend .person-avatar;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        width: 165px;
+        height: 165px;
+    }
+}

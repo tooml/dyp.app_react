@@ -1,7 +1,15 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "dyp.app",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "build"
+    "appId": "io.ionic.starter",
+    "appName": "dyp.app",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "build",
+    "android": {
+        "allowMixedContent": true
+    },
+    "cordova": {
+        "preferences": {
+            "CameraUsesGeolocation": "false"
+        }
+    }
 }

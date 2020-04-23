@@ -50,18 +50,20 @@ export const fetchPersons = () => {
                 type: FETCH_PERSONS,
                 payload: persons
             });
-        }).catch((error) => {
+         })
+        .catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
                 payload: createToastMessage(error, 'warning', warningMessageDuration)
             });
-        }).finally(() => {
+        })
+        .finally(() => {
             dispatch<LoadingAction>({
                 type: LOADING,
                 payload: false
             });
         });
-    };
+     };
 };
 
 export const newPerson = () => {
@@ -71,7 +73,8 @@ export const newPerson = () => {
                 type: SELECT_PERSON,
                 payload: newPerson
             });
-        }).catch((error) => {
+        })
+        .catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
                 payload: createToastMessage(error, 'warning', warningMessageDuration)
@@ -126,7 +129,8 @@ export const savePerson = (person: Person) => {
                 type: SHOW_MESSAGE,
                 payload: createToastMessage('save', 'success', defaultMessageDuration)
             });
-        }).catch((error) => {
+        })
+        .catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
                 payload: createToastMessage(error, 'warning', warningMessageDuration)
@@ -142,6 +146,10 @@ export const savePerson = (person: Person) => {
 
 export const deletePerson = (person: Person) => {
     return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
         api.deltePerson(person.id).then(result => {
             dispatch<DeletePersonAction>({
                 type: DELETE_PERSON,

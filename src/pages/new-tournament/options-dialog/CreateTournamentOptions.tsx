@@ -8,7 +8,7 @@ import Header from '../../../components/Header';
 import { StoreState } from '../../../state/store/Store';
 import {
     setTablesOption, setPointsOption, setPointsDrawnOption,
-    setDrawnOption, setSetsOption, setWalkoverOption
+    setDrawnOption, setSetsOption, setFairLotsOption
 } from '../../../state/actions/OptionsActions';
 import { RouteComponentProps, withRouter } from 'react-router';
 import Options from '../../../contracts/data/Options';
@@ -41,7 +41,7 @@ const CreateTournamentOptions: React.FC<RouteComponentProps> = (props) => {
                 changePointsDrawn={(value: number) => dispatch(setPointsDrawnOption(value))}
                 changeDrawn={(value: boolean) => dispatch(setDrawnOption(value))}
                 changeSets={(value: number) => dispatch(setSetsOption(value))}
-                setWalkover={(value: boolean) => dispatch(setWalkoverOption(value))}
+                changeFairLots={(value: boolean) => dispatch(setFairLotsOption(value))}
             />
             <AcceptButton disabled={false} onClick={pushOptionsToStore} />
         </IonPage>

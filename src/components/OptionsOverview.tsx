@@ -19,7 +19,7 @@ interface OptionsOverviewProps {
     changePointsDrawn: (value: number) => void,
     changeDrawn: (value: boolean) => void,
     changeSets: (value: number) => void,
-    setWalkover: (value: boolean) => void,
+    changeFairLots: (value: boolean) => void,
 }
 
 const OptionsOverview: React.FC<OptionsOverviewProps> = (props) => {
@@ -82,8 +82,8 @@ const OptionsOverview: React.FC<OptionsOverviewProps> = (props) => {
                 </IonItemDivider>
 
                 <Toggle label={'Fair draw'}
-                    checked={props.options.walkover}
-                    onChanged={value => props.setWalkover(value)} />
+                    checked={props.options.fairLots}
+                    onChanged={value => props.changeFairLots(value)} />
             </IonItemGroup>
         </IonContent>
     );

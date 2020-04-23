@@ -20,7 +20,7 @@ export interface TournamentItemProps {
 const TournamentItem: React.FC<TournamentItemProps> = (props) => {
     return (
         <IonItemSliding>
-            <IonItem button={true} onClick={() => props.loadTournament(props.tournament.id)}>
+            <IonItem detail={false} button={true} onClick={() => props.loadTournament(props.tournament.id)}>
                 <IonIcon slot="start" size="large" color="medium" icon={trophy} />
                 <IonLabel>
                     <h3>{props.tournament.name} {props.tournament.created}</h3>

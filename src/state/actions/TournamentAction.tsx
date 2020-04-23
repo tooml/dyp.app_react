@@ -5,6 +5,7 @@ import { Tournament, Round, Match, RankingRow } from '../../contracts/data/Tourn
 import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
 import Options from '../../contracts/data/Options';
 import { LoadingAction, LOADING } from './LoadingActions';
+import { defaultMessageDuration, warningMessageDuration } from './Constants';
 
 export const FETCH_TOURNAMENTS = 'FETCH_TOURNAMENTS'
 export const DELETE_TOURNAMENT = 'DELETE_TOURNAMENT'
@@ -19,7 +20,7 @@ export const SET_TOURNAMENT_POINTS_OPTION = 'SET_TOURNAMENT_POINTS_OPTION'
 export const SET_TOURNAMENT_POINTS_DRAWN_OPTION = 'SET_TOURNAMENT_POINTS_DRAWN_OPTION'
 export const SET_TOURNAMENT_DRAWN_OPTION = 'SET_TOURNAMENT_DRAWN_OPTION'
 export const SET_TOURNAMENT_SETS_OPTION = 'SET_TOURNAMENT_SETS_OPTION'
-export const SET_TOURNAMENT_WALKOVER_OPTION = 'SET_TOURNAMENT_WALKOVER_OPTION'
+export const SET_TOURNAMENT_FAIR_LOTS_OPTION = 'SET_TOURNAMENT_FAIR_LOTS_OPTION'
 
 export interface FetchTournamentsAction {
     type: typeof FETCH_TOURNAMENTS;
@@ -86,15 +87,15 @@ export interface SetTournamentSetsOptionAction {
     payload: number;
 }
 
-export interface SetTournamentWalkoverOptionAction {
-    type: typeof SET_TOURNAMENT_WALKOVER_OPTION;
+export interface SetTournamentFairLotsOptionAction {
+    type: typeof SET_TOURNAMENT_FAIR_LOTS_OPTION;
     payload: boolean;
 }
 
 export type TournamentsActionTypes = FetchTournamentsAction | DeleteTournamentAction | LoadTournamenAction |
     NewRoundAction | SelectMatchAction | SaveMatchResultAction | ResetMatchResultAction | FetchTournamentRankingAction |
     SetTournamentTablesOptionAction | SetTournamentPointsOptionAction | SetTournamentPointsDrawnOptionAction |
-    SetTournamentDrawnOptionAction | SetTournamentSetsOptionAction | SetTournamentWalkoverOptionAction
+    SetTournamentDrawnOptionAction | SetTournamentSetsOptionAction | SetTournamentFairLotsOptionAction
 
 export const createNewTournament = (options: Options, ids: string[]) => {
     return async (dispatch: Dispatch) => {
@@ -108,7 +109,7 @@ export const createNewTournament = (options: Options, ids: string[]) => {
             }).catch((error) => {
                 dispatch<ShowMessageAction>({
                     type: SHOW_MESSAGE,
-                    payload: createToastMessage(error, 'warning', 3000)
+                    payload: createToastMessage(error, 'warning', warningMessageDuration)
                 });
             }).finally(() => {
                 dispatch<LoadingAction>({
@@ -128,12 +129,12 @@ export const deleteTournament = (tournament: TournamentInfo) => {
             });
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success', 600)
+                payload: createToastMessage('save', 'success', defaultMessageDuration)
             });
         }).catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+                payload: createToastMessage(error, 'warning', warningMessageDuration)
             });
         });
     };
@@ -153,7 +154,7 @@ export const fetchTournaments = () => {
         }).catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+                payload: createToastMessage(error, 'warning', warningMessageDuration)
             });
         }).finally(() => {
             dispatch<LoadingAction>({
@@ -175,17 +176,18 @@ export const loadTournament = (tournamentId: string) => {
                 type: LOAD_TOURNAMENT,
                 payload: tournament
             })
-        }).then(dispatch<any>(fetchTournamentRanking(tournamentId))).catch((error) => {
-            dispatch<ShowMessageAction>({
-                type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+        }).then(dispatch<any>(fetchTournamentRanking(tournamentId)))
+            .catch((error) => {
+                dispatch<ShowMessageAction>({
+                    type: SHOW_MESSAGE,
+                    payload: createToastMessage(error, 'warning', warningMessageDuration)
+                });
+            }).finally(() => {
+                dispatch<LoadingAction>({
+                    type: LOADING,
+                    payload: false
+                });
             });
-        }).finally(() => {
-            dispatch<LoadingAction>({
-                type: LOADING,
-                payload: false
-            });
-        });
     };
 };
 
@@ -204,7 +206,7 @@ export const newRound = (tournamentId: string) => {
             }).catch((error) => {
                 dispatch<ShowMessageAction>({
                     type: SHOW_MESSAGE,
-                    payload: createToastMessage(error, 'warning', 3000)
+                    payload: createToastMessage(error, 'warning', warningMessageDuration)
                 });
             }).finally(() => {
                 dispatch<LoadingAction>({
@@ -234,12 +236,12 @@ export const saveMatchResult = (match: Match, tournamentId: string) => {
             dispatch<any>(fetchTournamentRanking(tournamentId));
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success', 600)
+                payload: createToastMessage('save', 'success', defaultMessageDuration)
             });
         }).catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+                payload: createToastMessage(error, 'warning', warningMessageDuration)
             });
         });
     };
@@ -256,12 +258,12 @@ export const resetMatchResult = (match: Match, tournamentId: string) => {
             dispatch<any>(fetchTournamentRanking(tournamentId));
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success', 600)
+                payload: createToastMessage('save', 'success', defaultMessageDuration)
             });
         }).catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+                payload: createToastMessage(error, 'warning', warningMessageDuration)
             });
         });
     };
@@ -281,7 +283,7 @@ export const fetchTournamentRanking = (tournamentId: string) => {
         }).catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+                payload: createToastMessage(error, 'warning', warningMessageDuration)
             });
         }).finally(() => {
             dispatch<LoadingAction>({
@@ -337,11 +339,11 @@ export const setTournamentSetsOption = (sets: number) => {
     };
 };
 
-export const setTournamentWalkoverOption = (walkover: boolean) => {
+export const setTournamentFairLotsOption = (fairLots: boolean) => {
     return async (dispatch: Dispatch) => {
-        dispatch<SetTournamentWalkoverOptionAction>({
-            type: SET_TOURNAMENT_WALKOVER_OPTION,
-            payload: walkover
+        dispatch<SetTournamentFairLotsOptionAction>({
+            type: SET_TOURNAMENT_FAIR_LOTS_OPTION,
+            payload: fairLots
         });
     };
 };
@@ -352,7 +354,7 @@ export const changeTournamentOptions = (tournamentId: string, options: Options) 
             dispatch<any>(fetchTournamentRanking(tournamentId));
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success', 600)
+                payload: createToastMessage('save', 'success', defaultMessageDuration)
             });
         }).catch((error) => {
             dispatch<ShowMessageAction>({

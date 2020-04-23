@@ -3,6 +3,7 @@ import * as api from '../../api/Api'
 import { Competitor } from '../../contracts/data/Competitor';
 import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
 import { LoadingAction, LOADING } from './LoadingActions';
+import { warningMessageDuration, defaultMessageDuration } from './Constants';
 
 export const FETCH_INITIAL_COMPETITORS = 'FETCH_INITIAL_COMPETITORS'
 export const TOGGLE_COMPETITOR = 'TOGGLE_COMPETITOR'
@@ -74,7 +75,7 @@ export const fetchTournamentCompetitors = (tournamentId: string) => {
         }).catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+                payload: createToastMessage(error, 'warning', warningMessageDuration)
             });
         }).finally(() => {
             dispatch<LoadingAction>({
@@ -95,12 +96,12 @@ export const saveTournamentCompetitors = (tournamentId: string, competitorIds: s
             dispatch<any>(fetchTournamentCompetitors(tournamentId));
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage('save', 'success', 600)
+                payload: createToastMessage('save', 'success', defaultMessageDuration)
             });
         }).catch((error) => {
             dispatch<ShowMessageAction>({
                 type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', 3000)
+                payload: createToastMessage(error, 'warning', warningMessageDuration)
             });
         }).finally(() => {
             dispatch<LoadingAction>({

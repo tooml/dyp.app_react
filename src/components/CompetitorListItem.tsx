@@ -8,7 +8,7 @@ import {
 
 import { Competitor } from '../contracts/data/Competitor';
 import Toggle from './Toggle';
-import { person } from 'ionicons/icons';
+import Avatar from './Avatar';
 
 export interface CompetitorListItemProps {
     competitor: Competitor,
@@ -18,7 +18,7 @@ export interface CompetitorListItemProps {
 const CompetitorListItem: React.FC<CompetitorListItemProps> = (props) => {
     return (
         <IonItem>
-            <IonIcon slot="start" size="large" icon={person} />
+            <Avatar avatarSrc={props.competitor.image} size='medium' />
             <IonLabel>
                 <h3>{props.competitor.name}</h3>
             </IonLabel>
@@ -27,7 +27,8 @@ const CompetitorListItem: React.FC<CompetitorListItemProps> = (props) => {
                         const c: Competitor = { 
                             id: props.competitor.id, 
                             name: props.competitor.name, 
-                            compete: value 
+                            compete: value,
+                            image: props.competitor.image
                         }
                         props.onCompeteChange(c); 
                         }} />

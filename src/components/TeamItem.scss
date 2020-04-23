@@ -1,6 +1,6 @@
 #team-container {
     display: grid;
-    grid-auto-rows: 30px;
+    grid-auto-rows: auto;
     align-items: center;
     justify-items: center stretch;
     grid-template-areas: 'player-one' 'player-two'
