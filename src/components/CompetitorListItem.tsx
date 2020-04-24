@@ -2,8 +2,7 @@ import React from 'react';
 
 import {
     IonLabel,
-    IonItem,
-    IonIcon
+    IonItem
 } from '@ionic/react';
 
 import { Competitor } from '../contracts/data/Competitor';
@@ -18,7 +17,7 @@ export interface CompetitorListItemProps {
 const CompetitorListItem: React.FC<CompetitorListItemProps> = (props) => {
     return (
         <IonItem>
-            <Avatar avatarSrc={props.competitor.image} size='medium' />
+            <Avatar personId={props.competitor.id} avatarSrc={''} size='medium' />
             <IonLabel>
                 <h3>{props.competitor.name}</h3>
             </IonLabel>
@@ -27,8 +26,7 @@ const CompetitorListItem: React.FC<CompetitorListItemProps> = (props) => {
                         const c: Competitor = { 
                             id: props.competitor.id, 
                             name: props.competitor.name, 
-                            compete: value,
-                            image: props.competitor.image
+                            compete: value
                         }
                         props.onCompeteChange(c); 
                         }} />

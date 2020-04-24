@@ -16,7 +16,7 @@ const MatchHeader: React.FC<MatchHeaderProps> = (props) => {
 
     return (
         <div id="match-header-container">
-            <div id="test-home">Home</div>
+            <div id="header-home">Home</div>
             <div id="header-home-team">
                 <TeamItem team={props.match.home} home={true} shortName={false} size='medium' />
             </div>
@@ -24,7 +24,7 @@ const MatchHeader: React.FC<MatchHeaderProps> = (props) => {
 
             <div id="header-text">vs</div>
 
-            <div id="test-away">Away</div>
+            <div id="header-away">Away</div>
             <div id="header-away-team">
                 <TeamItem team={props.match.away} home={true} shortName={false} size='medium'/>
             </div>

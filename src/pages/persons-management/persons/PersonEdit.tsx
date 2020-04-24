@@ -24,16 +24,20 @@ const PersonEdit: React.FC = () => {
 
     const dispatch = useDispatch();
     const person: Person = useSelector((state: StoreState) => state.personsState.person);
+    const personAvatar: string | undefined = useSelector((state: StoreState) => 
+        state.personsState.avatars.find(x => x.personId === person.id)?.avatar);
+
     const personStats: PersonStats = useSelector((state: StoreState) => state.personsState.personStats);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [avatar, setAvatar] = useState('');
 
     useEffect(() => {
+        const _avatar = (personAvatar === undefined ? "" : personAvatar) 
         setFirstName(person.firstName);
         setLastName(person.lastName);
-        setAvatar(person.image);
-    }, [person, dispatch]);
+        setAvatar(_avatar);
+    }, [person, dispatch, personAvatar]);
 
     const newPhoto = () => {
         takePhoto().then(photo => {
@@ -46,11 +50,10 @@ const PersonEdit: React.FC = () => {
         const editedPerson: Person = {
             id: person.id,
             firstName: firstName,
-            lastName: lastName,
-            image: avatar
+            lastName: lastName
         }
 
-        dispatch(savePerson(editedPerson));
+        dispatch(savePerson(editedPerson, avatar));
     }
 
     return (
@@ -62,7 +65,7 @@ const PersonEdit: React.FC = () => {
                         <IonRow>
                             <IonCol />
                             <IonCol class="ion-align-self-end ion-margin">
-                                <Avatar avatarSrc={avatar} size='big' />
+                                <Avatar avatarSrc={avatar} personId={''} size='big' />
                             </IonCol>
                             <IonCol />
                         </IonRow>
@@ -91,7 +94,7 @@ const PersonEdit: React.FC = () => {
                                 <IonItem>
                                     <IonInput value={lastName} onInput={e => setLastName((e.target as HTMLInputElement).value)}
                                         name="lastName" type="text" placeholder="Nachname"
-                                        maxlength={10} minlength={3} />
+                                        maxlength={10} minlength={3} required={true}/>
                                 </IonItem>
                             </IonCol>
                         </IonRow>

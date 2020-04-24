@@ -1,4 +1,4 @@
-import { Person, PersonStats } from '../../contracts/data/Person';
+import { Person, PersonStats, PersonAvatar } from '../../contracts/data/Person';
 import { Dispatch } from 'redux';
 import * as api from '../../api/Api'
 import { ShowMessageAction, SHOW_MESSAGE, createToastMessage } from './MessageActions';
@@ -6,14 +6,21 @@ import { LoadingAction, LOADING } from './LoadingActions';
 import { warningMessageDuration, defaultMessageDuration } from './Constants';
 
 export const FETCH_PERSONS = 'FETCH_PERSONS'
+export const FETCH_PERSON_AVATARS = 'FETCH_PERSON_AVATARS'
 export const FETCH_PERSON_STATS = 'FETCH_PERSON_STATS'
 export const SELECT_PERSON = 'SELECT_PERSON'
 export const SAVE_PERSON = 'SAVE_PERSON'
+export const SAVE_PERSON_AVATAR = 'SAVE_PERSON_AVATAR'
 export const DELETE_PERSON = 'DELETE_PERSON'
 
 export interface FetchPersonsAction {
     type: typeof FETCH_PERSONS;
     payload: Person[];
+}
+
+export interface FetchPersonAvatarsAction {
+    type: typeof FETCH_PERSON_AVATARS;
+    payload: PersonAvatar[];
 }
 
 export interface FetchPersonStatsAction {
@@ -28,7 +35,7 @@ export interface SelectPersonAction {
 
 export interface SavePersonAction {
     type: typeof SAVE_PERSON;
-    payload: Person;
+    payload: [Person, PersonAvatar];
 }
 
 export interface DeletePersonAction {
@@ -36,8 +43,8 @@ export interface DeletePersonAction {
     payload: Person;
 }
 
-export type PersonActionTypes = FetchPersonsAction | FetchPersonStatsAction | SelectPersonAction |
-    SavePersonAction | DeletePersonAction;
+export type PersonActionTypes = FetchPersonsAction | FetchPersonAvatarsAction | FetchPersonStatsAction |
+    SelectPersonAction | SavePersonAction | DeletePersonAction;
 
 export const fetchPersons = () => {
     return async (dispatch: Dispatch) => {
@@ -50,20 +57,47 @@ export const fetchPersons = () => {
                 type: FETCH_PERSONS,
                 payload: persons
             });
-         })
-        .catch((error) => {
-            dispatch<ShowMessageAction>({
-                type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', warningMessageDuration)
+        })
+            .catch((error) => {
+                dispatch<ShowMessageAction>({
+                    type: SHOW_MESSAGE,
+                    payload: createToastMessage(error, 'warning', warningMessageDuration)
+                });
+            })
+            .finally(() => {
+                dispatch<LoadingAction>({
+                    type: LOADING,
+                    payload: false
+                });
+            });
+    };
+};
+
+export const fetchPersonAvatars = () => {
+    return async (dispatch: Dispatch) => {
+        dispatch<LoadingAction>({
+            type: LOADING,
+            payload: true
+        });
+        api.getPersonAvatars().then(avatars => {
+            dispatch<FetchPersonAvatarsAction>({
+                type: FETCH_PERSON_AVATARS,
+                payload: avatars
             });
         })
-        .finally(() => {
-            dispatch<LoadingAction>({
-                type: LOADING,
-                payload: false
+            .catch((error) => {
+                dispatch<ShowMessageAction>({
+                    type: SHOW_MESSAGE,
+                    payload: createToastMessage(error, 'warning', warningMessageDuration)
+                });
+            })
+            .finally(() => {
+                dispatch<LoadingAction>({
+                    type: LOADING,
+                    payload: false
+                });
             });
-        });
-     };
+    };
 };
 
 export const newPerson = () => {
@@ -74,12 +108,12 @@ export const newPerson = () => {
                 payload: newPerson
             });
         })
-        .catch((error) => {
-            dispatch<ShowMessageAction>({
-                type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', warningMessageDuration)
+            .catch((error) => {
+                dispatch<ShowMessageAction>({
+                    type: SHOW_MESSAGE,
+                    payload: createToastMessage(error, 'warning', warningMessageDuration)
+                });
             });
-        });
     };
 };
 
@@ -113,16 +147,16 @@ export const selectPerson = (person: Person) => {
     };
 };
 
-export const savePerson = (person: Person) => {
+export const savePerson = (person: Person, personAvatar: string) => {
     return async (dispatch: Dispatch) => {
         dispatch<LoadingAction>({
             type: LOADING,
             payload: true
         });
-        api.savePersons(person).then(result => {
+        api.savePersons(person, personAvatar).then(result => {
             dispatch<SavePersonAction>({
                 type: SAVE_PERSON,
-                payload: person
+                payload: [person, { personId: person.id, avatar: personAvatar }]
             });
         }).then(() => {
             dispatch<ShowMessageAction>({
@@ -130,17 +164,17 @@ export const savePerson = (person: Person) => {
                 payload: createToastMessage('save', 'success', defaultMessageDuration)
             });
         })
-        .catch((error) => {
-            dispatch<ShowMessageAction>({
-                type: SHOW_MESSAGE,
-                payload: createToastMessage(error, 'warning', warningMessageDuration)
+            .catch((error) => {
+                dispatch<ShowMessageAction>({
+                    type: SHOW_MESSAGE,
+                    payload: createToastMessage(error, 'warning', warningMessageDuration)
+                });
+            }).finally(() => {
+                dispatch<LoadingAction>({
+                    type: LOADING,
+                    payload: false
+                });
             });
-        }).finally(() => {
-            dispatch<LoadingAction>({
-                type: LOADING,
-                payload: false
-            });
-        });
     };
 };
 

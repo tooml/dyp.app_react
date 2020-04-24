@@ -3,19 +3,19 @@
     &-small {
         @extend .person-avatar;
         padding: 5px;
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
     }
     &-medium {
         @extend .person-avatar;
-        width: 47px;
-        height: 47px;
+        width: 55px;
+        height: 55px;
     }
     &-big {
         @extend .person-avatar;
-        margin-top: 40px;
+        margin-top: 35px;
         margin-bottom: 30px;
-        width: 165px;
-        height: 165px;
+        width: 210px;
+        height: 210px;
     }
 }

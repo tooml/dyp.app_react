@@ -1,9 +1,12 @@
-
 export interface Person {
   id: string,
   firstName: string,
-  lastName: string,
-  image: string,
+  lastName: string
+}
+
+export interface PersonAvatar {
+  personId: string,
+  avatar: string
 }
 
 export interface PersonStats {

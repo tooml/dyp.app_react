@@ -18,7 +18,7 @@ const PersonListItem: React.FC<PersonProps> = (props) => {
         <IonItemSliding >
 
             <IonItem detail={false} routerLink={'/edit/person'} button={true} onClick={() => props.selectPerson(props.person)}>
-                <Avatar avatarSrc={props.person.image} size='medium' />
+                <Avatar personId={props.person.id} avatarSrc={''} size='medium' />
                 <IonLabel>
                     <h3>{props.person.firstName} , {props.person.lastName}</h3>
                 </IonLabel>

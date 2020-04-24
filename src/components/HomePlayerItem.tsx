@@ -16,7 +16,7 @@ const HomePlayerItem: React.FC<HomePlayerItemProps> = (props) => {
             {props.shortName ? <div id="home-player">{props.player.fullNameShort}</div> :
                 <div id="home-player">{props.player.fullName}</div>}
             <div id="home-player-pic">
-                <Avatar avatarSrc={props.player.image} size={props.size} />
+                <Avatar personId={props.player.id} avatarSrc={''} size={props.size} />
             </div>
         </div>
     )

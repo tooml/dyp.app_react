@@ -15,7 +15,7 @@ import PersonsList from './PersonsList';
 import AddButton from '../../../components/buttons/AddButton';
 
 const Persons: React.FC<RouteComponentProps> = (props) => {
-// https://ionicframework.com/docs/react/your-first-app/2-taking-photos
+
     const dispatch = useDispatch();
     const persons: Person[] = useSelector((state: StoreState) => state.personsState.persons);
 

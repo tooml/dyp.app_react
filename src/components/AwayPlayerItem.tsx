@@ -16,7 +16,7 @@ const AwayPlayerItem: React.FC<AwayPlayerItemProps> = (props) => {
             {props.shortName ? <div id="away-player">{props.player.fullNameShort}</div> :
                 <div id="away-player">{props.player.fullName}</div>}
             <div id="away-player-pic">
-                <Avatar avatarSrc={props.player.image} size={props.size} />
+                <Avatar personId={props.player.id} avatarSrc={''} size={props.size} />
             </div>
         </div>
     )

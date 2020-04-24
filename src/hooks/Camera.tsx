@@ -9,7 +9,9 @@ function usePhoto() {
       const cameraPhoto = await getPhoto({
         resultType: CameraResultType.DataUrl,
         source: CameraSource.Camera,
-        quality: 100
+        quality: 75,
+        width: 1000,
+        height: 1000
       });
       return cameraPhoto.dataUrl;
     };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Person, PersonStats } from '../contracts/data/Person';
+import { Person, PersonStats, PersonAvatar } from '../contracts/data/Person';
 import { Tournament, SetResult, Round, RankingRow } from '../contracts/data/Tournament';
 import TournamentInfo from '../contracts/data/TournamentInfo';
 import { Competitor } from '../contracts/data/Competitor';
@@ -21,18 +21,21 @@ interface PersonTemplateQueryResult {
     id: string;
     firstName: string;
     lastName: string;
-    image: string;
 }
 
 interface StorePersonCommand {
     id: string;
     firstName: string;
     lastName: string;
-    image: string;
+    avatar: string;
 }
 
 interface DeletePersonCommand {
     id: string;
+}
+
+interface PersonAvatarsQueryResult {
+    avatars: PersonAvatar[]
 }
 
 interface CompetitorsQueryResult {
@@ -104,7 +107,7 @@ interface ChangeOptionsCommand {
 
 
 axios.defaults.baseURL = 'http://localhost:5000/api/v1/';
-//axios.defaults.baseURL = 'http://192.168.4.1:8888/api/v1/';
+//axios.defaults.baseURL = 'http://192.168.5.1:5000/api/v1/';
 //axios.defaults.baseURL = 'http://192.168.178.26:8080/api/v1/';
 //ionic build
 //npx cap copy
@@ -146,24 +149,30 @@ export const getPersonTemplate = async () => {
         const newPerson: Person = {
             id: personTemplate.id,
             firstName: personTemplate.firstName,
-            lastName: personTemplate.lastName,
-            image: personTemplate.image
+            lastName: personTemplate.lastName
         };
         return newPerson;
     });
 }
 
-export const savePersons = async (person: Person) => {
+export const savePersons = async (person: Person, personAvatar: string) => {
     const command: StorePersonCommand = { 
         id: person.id, 
         firstName: 
         person.firstName, 
         lastName: person.lastName,
-        image: person.image 
+        avatar: personAvatar
     };
 
     return await axios.post('/person', command, axiosConfig).then(response => {
         return response;
+    });
+}
+
+export const getPersonAvatars = async () => {
+    return await axios.get<PersonAvatarsQueryResult>('person/all/avatar').then(response => {
+        console.log(response);
+        return response.data.avatars;
     });
 }
 

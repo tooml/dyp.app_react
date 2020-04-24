@@ -5,8 +5,7 @@ export interface Player {
   firstName: string,
   lastName: string,
   fullName: string,
-  fullNameShort: string,
-  image: string
+  fullNameShort: string
 }
 
 export interface Team {
